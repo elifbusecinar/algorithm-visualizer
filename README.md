@@ -1,16 +1,70 @@
-# React + Vite
+# Algorithm Visualizer
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Overview
+This project is an interactive algorithm visualizer that helps users understand various algorithms through visual representation. Users can see how algorithms work step-by-step, making it easier to grasp complex concepts.
 
-Currently, two official plugins are available:
+## Live Demo
+You can view the live demo of the project at [Algorithm Visualizer](https://algorithm-visualizer-blush-nine.vercel.app/).
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
+- Visualize sorting algorithms like Bubble Sort, Merge Sort, and Quick Sort.
+- Understand searching algorithms such as Binary Search.
+- Interactive controls to step through algorithms.
+- Responsive design for various devices.
 
-## React Compiler
+## Technologies Used
+- React for building the user interface.
+- Tailwind CSS for styling.
+- Vite for fast development and build.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Installation
+To run this project locally, follow these steps:
+1. Clone the repository:
+   ```bash
+   git clone <repository-url>
+   ```
+2. Navigate to the project directory:
+   ```bash
+   cd algorithm-visualizer
+   ```
+3. Install the dependencies:
+   ```bash
+   npm install
+   ```
+4. Start the development server:
+   ```bash
+   npm run dev
+   ```
 
-## Expanding the ESLint configuration
+## Usage
+- Open your browser and go to `http://localhost:3000` to view the application.
+- Select an algorithm from the control panel to visualize its execution.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Algorithms Implemented
+
+### Sorting Algorithms
+- [x] Bubble Sort
+- [x] Selection Sort
+- [x] Insertion Sort
+- [x] Merge Sort
+- [x] Quick Sort
+
+### Searching Algorithms
+- [x] Binary Search
+
+### Array Algorithms
+- [x] Two Sum
+- [x] Contains Duplicate
+- [x] Max Subarray
+- [x] Longest Substring Without Repeating Characters
+- [x] Reverse Linked List
+- [x] Valid Parentheses
+- [x] Climbing Stairs
+- [x] Best Time to Buy and Sell Stock
+
+## Future Features
+Coming soon...
+
+This project is for educational and portfolio purposes.
+
+
