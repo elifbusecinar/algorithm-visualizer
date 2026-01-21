@@ -26,10 +26,14 @@ const AlgorithmVisualizer = () => {
   const [algorithm, setAlgorithm] = useState('twoSum');
   const [inputArray, setInputArray] = useState(DEFAULT_ARRAYS.twoSum);
   const [target, setTarget] = useState(9);
+  const [binarySearchTarget, setBinarySearchTarget] = useState(13);
   const [currentStep, setCurrentStep] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
   const [steps, setSteps] = useState([]);
   const [speed, setSpeed] = useState('medium');
+  const [parenString, setParenString] = useState('({[]})');
+  const [longestSubString, setLongestSubString] = useState('abcabcbb');
+  const [climbStairs, setClimbStairs] = useState(5);
 
   // Generate steps when algorithm or inputs change
   useEffect(() => {
@@ -49,13 +53,13 @@ const AlgorithmVisualizer = () => {
         generatedSteps = generateSelectionSortSteps(inputArray);
         break;
       case 'binarySearch':
-        generatedSteps = generateBinarySearchSteps(inputArray, target);
+        generatedSteps = generateBinarySearchSteps(inputArray, binarySearchTarget);
         break;
       case 'mergeSort':
         generatedSteps = generateMergeSortSteps(inputArray);
         break;
       case 'validParentheses':
-        generatedSteps = generateValidParenthesesSteps('({[]})');
+        generatedSteps = generateValidParenthesesSteps(parenString);
         break;
       case 'maxSubarray':
         generatedSteps = generateMaxSubarraySteps(inputArray);
@@ -70,13 +74,13 @@ const AlgorithmVisualizer = () => {
         generatedSteps = generateBestTimeToBuySellStockSteps(inputArray);
         break;
       case 'longestSubstring':
-        generatedSteps = generateLongestSubstringSteps('abcabcbb');
+        generatedSteps = generateLongestSubstringSteps(longestSubString);
         break;
       case 'reverseLinkedList':
         generatedSteps = generateReverseLinkedListSteps(inputArray);
         break;
       case 'climbingStairs':
-        generatedSteps = generateClimbingStairsSteps(5);
+        generatedSteps = generateClimbingStairsSteps(climbStairs);
         break;
       default:
         generatedSteps = [];
@@ -85,7 +89,7 @@ const AlgorithmVisualizer = () => {
     setSteps(generatedSteps);
     setCurrentStep(0);
     setIsPlaying(false);
-  }, [algorithm, inputArray, target]);
+  }, [algorithm, inputArray, target, binarySearchTarget, parenString, longestSubString, climbStairs]);
 
   // Auto-play functionality
   useEffect(() => {
@@ -127,10 +131,16 @@ const AlgorithmVisualizer = () => {
           setAlgorithm={setAlgorithm}
           inputArray={inputArray}
           setInputArray={setInputArray}
-          target={target}
-          setTarget={setTarget}
+          target={algorithm === 'binarySearch' ? binarySearchTarget : target}
+          setTarget={algorithm === 'binarySearch' ? setBinarySearchTarget : setTarget}
           speed={speed}
           setSpeed={setSpeed}
+          parenString={parenString}
+          setParenString={setParenString}
+          longestSubString={longestSubString}
+          setLongestSubString={setLongestSubString}
+          climbStairs={climbStairs}
+          setClimbStairs={setClimbStairs}
         />
 
         {/* Algorithm Info Banner */}

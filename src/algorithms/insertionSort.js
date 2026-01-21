@@ -4,9 +4,9 @@ export const generateInsertionSortSteps = (arr) => {
     let swaps = 0;
 
     steps.push({
-        description: 'Starting Insertion Sort - will build sorted array one element at a time',
+        description: 'Starting Insertion Sort - first element (index 0) is considered sorted',
         array: [...array],
-        highlight: [],
+        highlight: [0],
         sorted: [0],
         swaps: 0,
         code: 'for (let i = 1; i < n; i++) { ... }'
