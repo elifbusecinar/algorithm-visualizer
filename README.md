@@ -12,7 +12,9 @@ Experience the visualizer live: [Algorithm Visualizer](https://algorithm-visuali
 - **Customizable Inputs**: Modify array values and algorithm parameters in real-time
 - **Beautiful Dark Mode UI**: Modern, fuchsia-themed interface with smooth animations
 - **Speed Control**: Adjust animation speed to match your learning pace
+- **Speed Control**: Adjust animation speed to match your learning pace
 - **Responsive Design**: Works seamlessly across desktop and mobile devices
+- **Complexity Analysis Panel**: View detailed Time and Space complexity (Best/Avg/Worst) for each algorithm
 
 ## 🛠️ Technologies Used
 
@@ -69,13 +71,15 @@ The application will be available at `http://localhost:5173`
 - Collapsible panel to maximize screen space when not needed
 - Syntax-highlighted code with step annotations
 
-### 2. **Algorithm Comparison Mode**
+
+
+### 3. **Algorithm Comparison Mode**
 - Side-by-side comparison of two algorithms
 - Synchronized or independent execution controls
 - Visual performance comparison on the same dataset
 - Ideal for understanding trade-offs between different approaches
 
-### 3. **Complexity Analysis Display**
+### 4. **Complexity Analysis Display**
 - Real-time time and space complexity indicators
 - Big O notation with explanations
 - Operation counters (comparisons, swaps, etc.)

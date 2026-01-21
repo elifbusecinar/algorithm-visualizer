@@ -1,4 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import { Info, X } from 'lucide-react';
+import { complexityData } from '../data/complexityData';
+
 import Header from './Header';
 import ControlPanel from './ControlPanel';
 import ArrayVisualizer from './ArrayVisualizer';
@@ -22,6 +25,7 @@ import { generateLongestSubstringSteps } from '../algorithms/longestSubstring';
 import { generateReverseLinkedListSteps } from '../algorithms/reverseLinkedList';
 import { generateClimbingStairsSteps } from '../algorithms/climbingStairs';
 
+
 const AlgorithmVisualizer = () => {
   const [algorithm, setAlgorithm] = useState('twoSum');
   const [inputArray, setInputArray] = useState(DEFAULT_ARRAYS.twoSum);
@@ -34,6 +38,8 @@ const AlgorithmVisualizer = () => {
   const [parenString, setParenString] = useState('({[]})');
   const [longestSubString, setLongestSubString] = useState('abcabcbb');
   const [climbStairs, setClimbStairs] = useState(5);
+  const [showComplexity, setShowComplexity] = useState(false);
+
 
   // Generate steps when algorithm or inputs change
   useEffect(() => {
@@ -144,8 +150,15 @@ const AlgorithmVisualizer = () => {
         />
 
         {/* Algorithm Info Banner */}
-        <div className="bg-gradient-to-r from-fuchsia-500/10 to-cyan-500/10 border border-fuchsia-500/20 rounded-2xl p-4 mb-6">
-          <p className="text-fuchsia-200">{algoInfo.description}</p>
+        <div className="flex items-center gap-4 bg-gradient-to-r from-fuchsia-500/10 to-cyan-500/10 border border-fuchsia-500/20 rounded-2xl p-4 mb-6">
+          <p className="text-fuchsia-200 flex-1">{algoInfo.description}</p>
+          <button
+            onClick={() => setShowComplexity(true)}
+            className="flex items-center gap-2 px-4 py-2 bg-fuchsia-500/20 hover:bg-fuchsia-500/30 border border-fuchsia-500/30 rounded-lg transition-colors text-fuchsia-300 font-medium"
+          >
+            <Info className="w-5 h-5" />
+            <span className="hidden sm:inline">Complexity Info</span>
+          </button>
         </div>
 
         {/* Main Visualization Area */}
@@ -170,6 +183,75 @@ const AlgorithmVisualizer = () => {
           handleReset={handleReset}
         />
       </div>
+
+      {/* Complexity Info Modal */}
+      {showComplexity && (
+        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <div className="bg-gray-900 border border-fuchsia-500/30 rounded-2xl w-full max-w-2xl shadow-2xl overflow-hidden animate-in fade-in zoom-in duration-200">
+            <div className="flex items-center justify-between p-6 border-b border-gray-800 bg-gray-900/50">
+              <h2 className="text-2xl font-bold text-white flex items-center gap-3">
+                <Info className="w-6 h-6 text-fuchsia-400" />
+                Complexity Analysis
+              </h2>
+              <button
+                onClick={() => setShowComplexity(false)}
+                className="text-gray-400 hover:text-white transition-colors p-1 hover:bg-white/10 rounded-lg"
+              >
+                <X className="w-6 h-6" />
+              </button>
+            </div>
+
+            <div className="p-6 space-y-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {/* Time Complexity */}
+                <div className="space-y-4">
+                  <h3 className="text-lg font-semibold text-fuchsia-300">Time Complexity</h3>
+                  <div className="space-y-3">
+                    <div className="bg-gray-800/50 p-4 rounded-xl border border-gray-700/50">
+                      <div className="text-sm text-green-400 mb-1">Best Case</div>
+                      <div className="text-xl font-mono font-bold text-white">
+                        {complexityData[algorithm]?.timeComplexity.best || "N/A"}
+                      </div>
+                    </div>
+                    <div className="bg-gray-800/50 p-4 rounded-xl border border-gray-700/50">
+                      <div className="text-sm text-yellow-400 mb-1">Average Case</div>
+                      <div className="text-xl font-mono font-bold text-white">
+                        {complexityData[algorithm]?.timeComplexity.average || "N/A"}
+                      </div>
+                    </div>
+                    <div className="bg-gray-800/50 p-4 rounded-xl border border-gray-700/50">
+                      <div className="text-sm text-red-400 mb-1">Worst Case</div>
+                      <div className="text-xl font-mono font-bold text-white">
+                        {complexityData[algorithm]?.timeComplexity.worst || "N/A"}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Space Complexity & Description */}
+                <div className="space-y-4">
+                  <div>
+                    <h3 className="text-lg font-semibold text-cyan-300 mb-4">Space Complexity</h3>
+                    <div className="bg-gray-800/50 p-4 rounded-xl border border-gray-700/50">
+                      <div className="text-sm text-cyan-400 mb-1">Worst Case</div>
+                      <div className="text-xl font-mono font-bold text-white">
+                        {complexityData[algorithm]?.spaceComplexity || "N/A"}
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="mt-6">
+                    <h3 className="text-lg font-semibold text-purple-300 mb-2">How it works</h3>
+                    <p className="text-gray-300 text-sm leading-relaxed bg-gray-800/30 p-4 rounded-xl border border-gray-700/30">
+                      {complexityData[algorithm]?.description || algoInfo.description}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
