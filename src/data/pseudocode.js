@@ -210,6 +210,46 @@ export const PSEUDOCODE = {
         "        if neighbor not in openSet: add to openSet",
         "  return failure"
     ],
+    bfs: [
+        "function BFS(start, target):",
+        "  create queue Q, enqueue start",
+        "  mark start as visited",
+        "  while Q is not empty:",
+        "    u = Q.dequeue()",
+        "    if u == target: return reconstruct_path()",
+        "    for each neighbor v of u:",
+        "      if v is not visited:",
+        "        mark v as visited",
+        "        prev[v] = u",
+        "        Q.enqueue(v)",
+        "  return failure"
+    ],
+    dfs: [
+        "function DFS(start, target):",
+        "  create stack S, push start",
+        "  while S is not empty:",
+        "    u = S.pop()",
+        "    if u is not visited:",
+        "      mark u as visited",
+        "      if u == target: return reconstruct_path()",
+        "      for each neighbor v of u:",
+        "        if v is not visited:",
+        "          prev[v] = u",
+        "          S.push(v)",
+        "  return failure"
+    ],
+    dfsTree: [
+        "function DFS_Tree_Iterative(root):",
+        "  if root is null: return",
+        "  Stack s =",
+        "  s.push(root)",
+        "  while s is not empty:",
+        "    node = s.pop()",
+        "    visit(node)",
+        "    if node.right: s.push(node.right)",
+        "    if node.left: s.push(node.left)",
+        "  return result"
+    ],
     binarySearchTree: [
         "function Insert(node, value):",
         "  if node is null:",

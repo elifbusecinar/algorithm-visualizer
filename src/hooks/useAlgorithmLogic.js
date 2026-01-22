@@ -17,7 +17,16 @@ import { generateContainerWithMostWaterSteps } from '../algorithms/containerWith
 import { generateMoveZeroesSteps } from '../algorithms/moveZeroes';
 import { generateDijkstraSteps } from '../algorithms/dijkstra';
 import { generateAStarSteps } from '../algorithms/aStar';
+import { generateBFSSteps } from '../algorithms/bfs';
+import { generateDFSSteps } from '../algorithms/dfs';
+import { generateDFSTreeSteps } from '../algorithms/dfsTree';
 import { generateBSTSteps } from '../algorithms/bst';
+import { generateInOrderSteps } from '../algorithms/inOrderTraversal';
+import { generatePreOrderSteps } from '../algorithms/preOrderTraversal';
+import { generatePostOrderSteps } from '../algorithms/postOrderTraversal';
+import { generateLevelOrderSteps } from '../algorithms/levelOrderTraversal';
+import { generateBSTSearchSteps } from '../algorithms/bstSearch';
+import { generateBSTDeleteSteps } from '../algorithms/bstDelete';
 
 export const useAlgorithmLogic = ({
     algorithm,
@@ -90,8 +99,35 @@ export const useAlgorithmLogic = ({
             case 'aStar':
                 generatedSteps = generateAStarSteps();
                 break;
+            case 'bfs':
+                generatedSteps = generateBFSSteps();
+                break;
+            case 'dfs':
+                generatedSteps = generateDFSSteps();
+                break;
+            case 'dfsTree':
+                generatedSteps = generateDFSTreeSteps(inputArray);
+                break;
             case 'binarySearchTree':
                 generatedSteps = generateBSTSteps(inputArray);
+                break;
+            case 'inOrderTraversal':
+                generatedSteps = generateInOrderSteps(inputArray);
+                break;
+            case 'preOrderTraversal':
+                generatedSteps = generatePreOrderSteps(inputArray);
+                break;
+            case 'postOrderTraversal':
+                generatedSteps = generatePostOrderSteps(inputArray);
+                break;
+            case 'levelOrderTraversal':
+                generatedSteps = generateLevelOrderSteps(inputArray);
+                break;
+            case 'bstSearch':
+                generatedSteps = generateBSTSearchSteps(inputArray, target);
+                break;
+            case 'bstDelete':
+                generatedSteps = generateBSTDeleteSteps(inputArray, target);
                 break;
             default:
                 generatedSteps = [];

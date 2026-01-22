@@ -1,3 +1,5 @@
+import { PSEUDOCODE } from '../data/pseudocode';
+
 export const ALGORITHMS = {
   twoSum: {
     name: 'Two Sum',
@@ -397,6 +399,71 @@ export const ALGORITHMS = {
          - Add to OpenSet
     `
   },
+  bfs: {
+    name: "Breadth First Search (BFS)",
+    type: 'grid',
+    complexity: 'O(V + E)',
+    timeComplexity: {
+      best: 'O(V + E)',
+      average: 'O(V + E)',
+      worst: 'O(V + E)'
+    },
+    spaceComplexity: 'O(V)',
+    description: 'Explores all nodes at the present depth level before moving on to the nodes at the next depth level.',
+    category: 'Pathfinding',
+    comparableInMode: true,
+    pseudocode: `
+1. Create a Queue Q
+2. Mark start node as visited and enqueue it
+3. While Q is not empty:
+   a. Dequeue current node u
+   b. If u is target, return path
+   c. For each unvisited neighbor v of u:
+      - Mark v as visited
+      - Enqueue v
+4. Return failure if Queue is empty
+    `
+  },
+  dfs: {
+    name: "Depth First Search (DFS)",
+    type: 'grid',
+    complexity: 'O(V + E)',
+    timeComplexity: {
+      best: 'O(V + E)',
+      average: 'O(V + E)',
+      worst: 'O(V + E)'
+    },
+    spaceComplexity: 'O(V)',
+    description: 'Explores as far as possible along each branch before backtracking.',
+    category: 'Pathfinding',
+    comparableInMode: true,
+    pseudocode: `
+1. Create a Stack S
+2. Push start node to S
+3. While S is not empty:
+   a. Pop current node u
+   b. If u is not visited:
+      - Mark u as visited
+      - If u is target, return path
+      - Push all unvisited neighbors of u to S
+4. Return failure if Stack is empty
+    `
+  },
+  dfsTree: {
+    name: "Depth First Search (DFS)",
+    type: 'tree',
+    complexity: 'O(V + E)',
+    timeComplexity: {
+      best: 'O(V + E)',
+      average: 'O(V + E)',
+      worst: 'O(V + E)'
+    },
+    spaceComplexity: 'O(V)',
+    description: 'Explores tree branches as far as possible before backtracking (Pre-Order Traversal).',
+    category: 'Tree',
+    comparableInMode: false,
+    pseudocode: PSEUDOCODE.dfsTree
+  },
   binarySearchTree: {
     name: "Binary Search Tree (BST)",
     type: 'tree',
@@ -424,6 +491,136 @@ export const ALGORITHMS = {
          - If Current.right is null, Current.right = Node(v)
          - Else, recurse right
     `
+  },
+  inOrderTraversal: {
+    name: "In-Order Traversal",
+    type: 'tree',
+    complexity: 'O(n)',
+    timeComplexity: {
+      best: 'O(n)',
+      average: 'O(n)',
+      worst: 'O(n)'
+    },
+    spaceComplexity: 'O(h)',
+    description: 'Traverse tree in Left-Root-Right order, visits nodes in sorted order for BST',
+    category: 'Tree',
+    comparableInMode: false,
+    pseudocode: `
+1. If node is null, return
+2. Recursively traverse left subtree
+3. Visit current node
+4. Recursively traverse right subtree
+5. Result: sorted order for BST
+    `
+  },
+  preOrderTraversal: {
+    name: "Pre-Order Traversal",
+    type: 'tree',
+    complexity: 'O(n)',
+    timeComplexity: {
+      best: 'O(n)',
+      average: 'O(n)',
+      worst: 'O(n)'
+    },
+    spaceComplexity: 'O(h)',
+    description: 'Traverse tree in Root-Left-Right order, useful for creating a copy of the tree',
+    category: 'Tree',
+    comparableInMode: false,
+    pseudocode: `
+1. If node is null, return
+2. Visit current node
+3. Recursively traverse left subtree
+4. Recursively traverse right subtree
+5. Result: root-first order
+    `
+  },
+  postOrderTraversal: {
+    name: "Post-Order Traversal",
+    type: 'tree',
+    complexity: 'O(n)',
+    timeComplexity: {
+      best: 'O(n)',
+      average: 'O(n)',
+      worst: 'O(n)'
+    },
+    spaceComplexity: 'O(h)',
+    description: 'Traverse tree in Left-Right-Root order, useful for deleting or freeing nodes',
+    category: 'Tree',
+    comparableInMode: false,
+    pseudocode: `
+1. If node is null, return
+2. Recursively traverse left subtree
+3. Recursively traverse right subtree
+4. Visit current node
+5. Result: children-first order
+    `
+  },
+  levelOrderTraversal: {
+    name: "Level-Order Traversal (BFS)",
+    type: 'tree',
+    complexity: 'O(n)',
+    timeComplexity: {
+      best: 'O(n)',
+      average: 'O(n)',
+      worst: 'O(n)'
+    },
+    spaceComplexity: 'O(w)',
+    description: 'Traverse tree level by level using a queue (Breadth-First Search)',
+    category: 'Tree',
+    comparableInMode: false,
+    pseudocode: `
+1. Create queue, add root
+2. While queue is not empty:
+   a. Dequeue node
+   b. Visit node
+   c. Enqueue left child if exists
+   d. Enqueue right child if exists
+3. Result: level-by-level order
+    `
+  },
+  bstSearch: {
+    name: "BST Search",
+    type: 'tree',
+    complexity: 'O(log n)',
+    timeComplexity: {
+      best: 'O(1)',
+      average: 'O(log n)',
+      worst: 'O(n)'
+    },
+    spaceComplexity: 'O(h)',
+    description: 'Search for a value in Binary Search Tree by comparing and traversing left or right',
+    category: 'Tree',
+    comparableInMode: false,
+    pseudocode: `
+1. If node is null, return not found
+2. If target == node.value, return found
+3. If target < node.value, search left
+4. If target > node.value, search right
+5. Repeat until found or null
+    `
+  },
+  bstDelete: {
+    name: "BST Delete",
+    type: 'tree',
+    complexity: 'O(log n)',
+    timeComplexity: {
+      best: 'O(log n)',
+      average: 'O(log n)',
+      worst: 'O(n)'
+    },
+    spaceComplexity: 'O(h)',
+    description: 'Delete a node from BST handling 3 cases: leaf, one child, two children',
+    category: 'Tree',
+    comparableInMode: false,
+    pseudocode: `
+1. Search for node to delete
+2. Case 1 - Leaf: simply remove
+3. Case 2 - One child: replace with child
+4. Case 3 - Two children:
+   - Find in-order successor (min in right)
+   - Replace value with successor
+   - Delete successor from right subtree
+    `
   }
 };
 
@@ -447,7 +644,13 @@ export const DEFAULT_ARRAYS = {
   reverseLinkedList: [1, 2, 3, 4, 5],
   containerWithMostWater: [1, 8, 6, 2, 5, 4, 8, 3, 7],
   moveZeroes: [0, 1, 0, 3, 12],
-  binarySearchTree: [50, 30, 70, 20, 40, 60, 80]
+  binarySearchTree: [50, 30, 70, 20, 40, 60, 80],
+  inOrderTraversal: [50, 30, 70, 20, 40, 60, 80],
+  preOrderTraversal: [50, 30, 70, 20, 40, 60, 80],
+  postOrderTraversal: [50, 30, 70, 20, 40, 60, 80],
+  levelOrderTraversal: [50, 30, 70, 20, 40, 60, 80],
+  bstSearch: [50, 30, 70, 20, 40, 60, 80],
+  bstDelete: [50, 30, 70, 20, 40, 60, 80]
 };
 
 export const DEFAULT_INPUTS = {
