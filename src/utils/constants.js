@@ -10,6 +10,7 @@ export const ALGORITHMS = {
     spaceComplexity: 'O(n)',
     description: 'Find two numbers that add up to target using HashMap',
     category: 'Hash Table',
+    comparableInMode: false,
     pseudocode: `
 1. Create empty HashMap
 2. For each number in array:
@@ -30,6 +31,7 @@ export const ALGORITHMS = {
     spaceComplexity: 'O(n)',
     description: 'Check if array contains any duplicates using Set',
     category: 'Hash Table',
+    comparableInMode: false,
     pseudocode: `
 1. Create empty Set
 2. For each number in array:
@@ -49,6 +51,7 @@ export const ALGORITHMS = {
     spaceComplexity: 'O(1)',
     description: 'Sort array by repeatedly swapping adjacent elements',
     category: 'Sorting',
+    comparableInMode: true,
     pseudocode: `
 1. For i = 0 to n-1:
    a. For j = 0 to n-i-2:
@@ -68,6 +71,7 @@ export const ALGORITHMS = {
     spaceComplexity: 'O(1)',
     description: 'Sort by finding minimum element in each iteration',
     category: 'Sorting',
+    comparableInMode: true,
     pseudocode: `
 1. For i = 0 to n-1:
    a. Find minimum element in arr[i..n-1]
@@ -86,6 +90,7 @@ export const ALGORITHMS = {
     spaceComplexity: 'O(1)',
     description: 'Search for target in sorted array using divide and conquer',
     category: 'Search',
+    comparableInMode: false,
     pseudocode: `
 1. Set left = 0, right = n-1
 2. While left <= right:
@@ -107,6 +112,7 @@ export const ALGORITHMS = {
     spaceComplexity: 'O(n)',
     description: 'Efficient sorting using divide and conquer strategy',
     category: 'Sorting',
+    comparableInMode: true,
     pseudocode: `
 1. If array length <= 1, return array
 2. Find middle point
@@ -127,6 +133,7 @@ export const ALGORITHMS = {
     spaceComplexity: 'O(n)',
     description: 'Check if brackets are balanced using Stack',
     category: 'Stack',
+    comparableInMode: false,
     pseudocode: `
 1. Create empty Stack
 2. For each character in string:
@@ -149,6 +156,7 @@ export const ALGORITHMS = {
     spaceComplexity: 'O(1)',
     description: "Find contiguous subarray with largest sum (Kadane's Algorithm)",
     category: 'Dynamic Programming',
+    comparableInMode: false,
     pseudocode: `
 1. Initialize max_sum = arr[0], current_sum = arr[0]
 2. For i = 1 to n-1:
@@ -168,6 +176,7 @@ export const ALGORITHMS = {
     spaceComplexity: 'O(log n)',
     description: 'Fast sorting using pivot-based partitioning',
     category: 'Sorting',
+    comparableInMode: true,
     pseudocode: `
 1. If array length <= 1, return array
 2. Choose pivot element
@@ -190,6 +199,7 @@ export const ALGORITHMS = {
     spaceComplexity: 'O(1)',
     description: 'Build sorted array by inserting elements one at a time',
     category: 'Sorting',
+    comparableInMode: true,
     pseudocode: `
 1. For i = 1 to n-1:
    a. key = arr[i]
@@ -212,6 +222,7 @@ export const ALGORITHMS = {
     spaceComplexity: 'O(1)',
     description: 'Find maximum profit from stock prices array',
     category: 'Dynamic Programming',
+    comparableInMode: false,
     pseudocode: `
 1. If array length < 2, return 0
 2. min_price = arr[0], max_profit = 0
@@ -232,6 +243,7 @@ export const ALGORITHMS = {
     spaceComplexity: 'O(min(n, m))',
     description: 'Find longest substring without repeating characters',
     category: 'Sliding Window',
+    comparableInMode: false,
     pseudocode: `
 1. Create HashMap and left pointer = 0
 2. For right = 0 to n-1:
@@ -253,6 +265,7 @@ export const ALGORITHMS = {
     spaceComplexity: 'O(1)',
     description: 'Reverse a singly linked list iteratively',
     category: 'Linked List',
+    comparableInMode: false,
     pseudocode: `
 1. Initialize prev = null, current = head
 2. While current is not null:
@@ -274,6 +287,7 @@ export const ALGORITHMS = {
     spaceComplexity: 'O(n)',
     description: 'Count ways to climb n stairs (1 or 2 steps at a time)',
     category: 'Dynamic Programming',
+    comparableInMode: false,
     pseudocode: `
 1. If n <= 2, return n
 2. Create dp array of size n
@@ -294,6 +308,7 @@ export const ALGORITHMS = {
     spaceComplexity: 'O(1)',
     description: 'Find two lines that together with the x-axis form a container, such that the container contains the most water.',
     category: 'Two Pointers',
+    comparableInMode: false,
     pseudocode: `
 1. Initialize left = 0, right = n-1, max_area = 0
 2. While left < right:
@@ -317,6 +332,7 @@ export const ALGORITHMS = {
     spaceComplexity: 'O(1)',
     description: 'Move all 0s to the end while maintaining the relative order of the non-zero elements.',
     category: 'Array',
+    comparableInMode: false,
     pseudocode: `
 1. Initialize non_zero_ptr = 0
 2. For current = 0 to n-1:
@@ -338,6 +354,7 @@ export const ALGORITHMS = {
     spaceComplexity: 'O(V)',
     description: 'Finds the shortest path between nodes in a graph (grids included)',
     category: 'Pathfinding',
+    comparableInMode: true,
     pseudocode: `
 1. Init dist[] = Infinity, dist[start] = 0
 2. Priority Queue Q, add start
@@ -363,6 +380,7 @@ export const ALGORITHMS = {
     spaceComplexity: 'O(V)',
     description: 'Informed search using heuristics (Manhattan Distance) to find shortest path faster',
     category: 'Pathfinding',
+    comparableInMode: true,
     pseudocode: `
 1. Init g_score[] = Infinity, f_score[] = Infinity
 2. g_score[start] = 0, f_score[start] = h(start)
@@ -377,6 +395,34 @@ export const ALGORITHMS = {
          - g_score[neighbor] = tentative_g
          - f_score[neighbor] = g_score[neighbor] + h(neighbor)
          - Add to OpenSet
+    `
+  },
+  binarySearchTree: {
+    name: "Binary Search Tree (BST)",
+    type: 'tree',
+    complexity: 'O(log n)',
+    timeComplexity: {
+      best: 'O(log n)',
+      average: 'O(log n)',
+      worst: 'O(n)'
+    },
+    spaceComplexity: 'O(n)',
+    description: 'A hierarchical tree structure where left child < parent < right child.',
+    category: 'Tree',
+    comparableInMode: false,
+    pseudocode: `
+1. Input: Array of values [v1, v2, ...]
+2. Root = null
+3. For each value v:
+   a. Create Node(v)
+   b. If Root is null, Root = Node(v)
+   c. Else, insert recursive(Root, v)
+      - If v < Current.val: 
+         - If Current.left is null, Current.left = Node(v)
+         - Else, recurse left
+      - If v > Current.val:
+         - If Current.right is null, Current.right = Node(v)
+         - Else, recurse right
     `
   }
 };
@@ -400,7 +446,8 @@ export const DEFAULT_ARRAYS = {
   bestTimeToBuySellStock: [7, 1, 5, 3, 6, 4],
   reverseLinkedList: [1, 2, 3, 4, 5],
   containerWithMostWater: [1, 8, 6, 2, 5, 4, 8, 3, 7],
-  moveZeroes: [0, 1, 0, 3, 12]
+  moveZeroes: [0, 1, 0, 3, 12],
+  binarySearchTree: [50, 30, 70, 20, 40, 60, 80]
 };
 
 export const DEFAULT_INPUTS = {

@@ -3,6 +3,7 @@ import { Play, Pause, RotateCcw, ArrowLeft } from 'lucide-react';
 import VisualizerCanvas from './VisualizerCanvas';
 import { useAlgorithmLogic } from '../hooks/useAlgorithmLogic';
 import { ALGORITHMS, SPEEDS } from '../utils/constants';
+import { getComparableAlgorithms } from '../utils/comparisonUtils';
 
 const ComparisonView = ({
     inputArray,
@@ -14,6 +15,9 @@ const ComparisonView = ({
     // Two algorithms
     const [algo1, setAlgo1] = useState('bubbleSort');
     const [algo2, setAlgo2] = useState('quickSort');
+
+    // Available algorithms for second dropdown (filtered based on algo1)
+    const [availableAlgo2, setAvailableAlgo2] = useState([]);
 
     // Playback state
     const [isPlaying, setIsPlaying] = useState(false);
@@ -40,6 +44,18 @@ const ComparisonView = ({
         longestSubString: 'abcabcbb',
         climbStairs: 5
     });
+
+    // Update available algorithms for algo2 when algo1 changes
+    useEffect(() => {
+        const comparable = getComparableAlgorithms(algo1, ALGORITHMS);
+        setAvailableAlgo2(comparable);
+
+        // If current algo2 is not in the comparable list, reset to first available
+        const isAlgo2Valid = comparable.some(([key]) => key === algo2);
+        if (!isAlgo2Valid && comparable.length > 0) {
+            setAlgo2(comparable[0][0]);
+        }
+    }, [algo1]);
 
     // Derived max steps
     const maxSteps = Math.max(logic1.steps.length, logic2.steps.length);
@@ -100,7 +116,7 @@ const ComparisonView = ({
                         className="bg-gray-800 border border-gray-700 rounded-lg px-3 py-1.5"
                     >
                         {Object.entries(SPEEDS).map(([key, val]) => (
-                            <option key={key} value={key}>{val.label}</option>
+                            <option key={key} value={key}>{val.name}</option>
                         ))}
                     </select>
 
@@ -115,8 +131,8 @@ const ComparisonView = ({
                     <button
                         onClick={handleTogglePlay}
                         className={`flex items-center gap-2 px-6 py-2 rounded-lg font-medium transition-all ${isPlaying
-                                ? 'bg-amber-500/20 text-amber-300 hover:bg-amber-500/30'
-                                : 'bg-fuchsia-600 text-white hover:bg-fuchsia-500 shadow-lg shadow-fuchsia-900/20'
+                            ? 'bg-amber-500/20 text-amber-300 hover:bg-amber-500/30'
+                            : 'bg-fuchsia-600 text-white hover:bg-fuchsia-500 shadow-lg shadow-fuchsia-900/20'
                             }`}
                     >
                         {isPlaying ? <Pause className="w-5 h-5" /> : <Play className="w-5 h-5" />}
@@ -135,9 +151,11 @@ const ComparisonView = ({
                             onChange={(e) => setAlgo1(e.target.value)}
                             className="bg-gray-800 text-fuchsia-100 border-gray-700 rounded-lg p-2 w-full max-w-xs"
                         >
-                            {Object.entries(ALGORITHMS).map(([key, val]) => (
-                                <option key={key} value={key}>{val.name}</option>
-                            ))}
+                            {Object.entries(ALGORITHMS)
+                                .filter(([key, val]) => val.comparableInMode === true)
+                                .map(([key, val]) => (
+                                    <option key={key} value={key}>{val.name}</option>
+                                ))}
                         </select>
                         <div className="text-sm font-mono text-gray-400">
                             Step: {logic1.currentStep} / {logic1.steps.length - 1}
@@ -159,7 +177,7 @@ const ComparisonView = ({
                             onChange={(e) => setAlgo2(e.target.value)}
                             className="bg-gray-800 text-cyan-100 border-gray-700 rounded-lg p-2 w-full max-w-xs"
                         >
-                            {Object.entries(ALGORITHMS).map(([key, val]) => (
+                            {availableAlgo2.map(([key, val]) => (
                                 <option key={key} value={key}>{val.name}</option>
                             ))}
                         </select>

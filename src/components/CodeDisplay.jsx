@@ -13,8 +13,8 @@ const CodeDisplay = ({ code, pseudocode, highlightedLine }) => {
               <div
                 key={idx}
                 className={`px-2 py-0.5 rounded transition-colors duration-200 ${idx === highlightedLine
-                    ? 'bg-fuchsia-500/20 text-fuchsia-300 border-l-2 border-fuchsia-500'
-                    : 'text-gray-400 border-l-2 border-transparent'
+                  ? 'bg-fuchsia-500/20 text-fuchsia-300 border-l-2 border-fuchsia-500'
+                  : 'text-gray-400 border-l-2 border-transparent'
                   }`}
               >
                 {line}

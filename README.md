@@ -19,7 +19,8 @@ Experience the visualizer live: [Algorithm Visualizer](https://algorithm-visuali
 - **Recursive Call Stack Visualization**: Visualizes the call stack growth and shrinkage for recursive algorithms (Merge Sort, Quick Sort)
 - **Linked List Visualization**: Dynamic, arrow-based visualization for linked list operations
 - **Pathfinding Visualizer (Grid)**: Visualize Dijkstra's Algorithm on a 2D grid with walls and weighted nodes
-- **Algorithm Comparison Mode**: Side-by-side performance comparison of different algorithms on the same dataset
+- **Smart Algorithm Comparison Mode**: Side-by-side comparison with intelligent filtering - only shows comparable algorithms
+- **Tree Visualization**: Visual representation of Binary Search Tree construction with node positioning
 
 ## 🛠️ Technologies Used
 
@@ -63,6 +64,9 @@ The application will be available at `http://localhost:5173`
 - [x] **Dijkstra's Algorithm** - Shortest path in a weighted graph
 - [x] **A* Search Algorithm** - Heuristic-based pathfinding (Manhattan Distance)
 
+### Tree Data Structures
+- [x] **Binary Search Tree (BST)** - Tree insertion with step-by-step visualization
+
 ### Problem-Solving Algorithms
 - [x] **Two Sum** - Hash map approach for pair finding
 - [x] **Container With Most Water** - Two pointer optimization
@@ -83,8 +87,9 @@ The application will be available at `http://localhost:5173`
 - Execute custom code with the same visualization system
 - Compare user solutions with optimal implementations
 
-### 2. **Tree Data Structures**
-- Binary Search Tree (BST) operations (Insert, Delete, Search)
+### 2. **Enhanced Tree Data Structures**
+- Binary Search Tree operations (Delete, Search)
+- AVL Tree with rotation visualization
 - Tree Traversal Visualizations (In-order, Pre-order, Post-order, BFS/DFS)
 
 ### 3. **Interactive Quiz Mode**

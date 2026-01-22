@@ -46,7 +46,14 @@ const Controls = ({
           </button>
 
           <button
-            onClick={() => setIsPlaying(!isPlaying)}
+            onClick={() => {
+              if (currentStep >= totalSteps - 1) {
+                setCurrentStep(0);
+                setIsPlaying(true);
+              } else {
+                setIsPlaying(!isPlaying);
+              }
+            }}
             className="bg-gradient-to-r from-fuchsia-500 to-cyan-600 hover:from-fuchsia-600 hover:to-cyan-700 text-white px-8 py-3 rounded-xl transition-all shadow-lg shadow-fuchsia-500/30 flex items-center gap-2 font-semibold"
           >
             {isPlaying ? <Pause className="w-5 h-5" /> : <Play className="w-5 h-5" />}

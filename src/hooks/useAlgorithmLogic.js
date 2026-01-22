@@ -17,6 +17,7 @@ import { generateContainerWithMostWaterSteps } from '../algorithms/containerWith
 import { generateMoveZeroesSteps } from '../algorithms/moveZeroes';
 import { generateDijkstraSteps } from '../algorithms/dijkstra';
 import { generateAStarSteps } from '../algorithms/aStar';
+import { generateBSTSteps } from '../algorithms/bst';
 
 export const useAlgorithmLogic = ({
     algorithm,
@@ -88,6 +89,9 @@ export const useAlgorithmLogic = ({
                 break;
             case 'aStar':
                 generatedSteps = generateAStarSteps();
+                break;
+            case 'binarySearchTree':
+                generatedSteps = generateBSTSteps(inputArray);
                 break;
             default:
                 generatedSteps = [];

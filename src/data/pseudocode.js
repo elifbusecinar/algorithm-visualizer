@@ -209,5 +209,15 @@ export const PSEUDOCODE = {
         "        fScore[neighbor] = gScore[neighbor] + h(neighbor)",
         "        if neighbor not in openSet: add to openSet",
         "  return failure"
+    ],
+    binarySearchTree: [
+        "function Insert(node, value):",
+        "  if node is null:",
+        "    return createNode(value)",
+        "  if value < node.value:",
+        "    node.left = Insert(node.left, value)",
+        "  else if value > node.value:",
+        "    node.right = Insert(node.right, value)",
+        "  return node"
     ]
 };

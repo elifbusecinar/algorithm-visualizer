@@ -2,7 +2,8 @@ import React from 'react';
 import ArrayVisualizer from './ArrayVisualizer';
 import DataStructurePanel from './DataStructurePanel';
 import StepDescription from './StepDescription';
-import GridVisualizer from './GridVisualizer'; // [NEW]
+import GridVisualizer from './GridVisualizer';
+import TreeVisualizer from './TreeVisualizer'; // [NEW]
 import CodeDisplay from './CodeDisplay';
 import { PSEUDOCODE } from '../data/pseudocode';
 import { ALGORITHMS } from '../utils/constants';
@@ -13,6 +14,7 @@ const VisualizerCanvas = ({
     title // Optional title for Comparison Mode headers
 }) => {
     const isGridAlgorithm = ALGORITHMS[algorithm]?.type === 'grid';
+    const isTreeAlgorithm = ALGORITHMS[algorithm]?.type === 'tree'; // [NEW]
 
     return (
         <div className="flex flex-col gap-6">
@@ -24,10 +26,12 @@ const VisualizerCanvas = ({
 
             {/* Main Visualization Area */}
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                {/* Visualizer (Array or Grid) */}
+                {/* Visualizer (Array, Grid, or Tree) */}
                 <div className="lg:col-span-2 flex flex-col min-h-[400px]">
                     {isGridAlgorithm ? (
                         <GridVisualizer stepData={currentStepData} />
+                    ) : isTreeAlgorithm ? (
+                        <TreeVisualizer stepData={currentStepData} />
                     ) : (
                         <ArrayVisualizer stepData={currentStepData} />
                     )}
