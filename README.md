@@ -63,6 +63,8 @@ The application will be available at `http://localhost:5173`
 ### Pathfinding Algorithms
 - [x] **Dijkstra's Algorithm** - Shortest path in a weighted graph
 - [x] **A* Search Algorithm** - Heuristic-based pathfinding (Manhattan Distance)
+- [x] **Breadth First Search (BFS)** - Shortest path in unweighted graph (Level-by-level)
+- [x] **Depth First Search (DFS)** - Exhaustive path exploration (Backtracking)
 
 ### Tree Data Structures
 - [x] **Binary Search Tree (BST)** - Tree insertion with step-by-step visualization
@@ -103,22 +105,68 @@ All algorithms feature:
 
 ## 🚀 Planned Features
 
-### 1. **User-Written Code Execution**
+### 1. **Live Complexity Growth Chart 📈**
+- Real-time graphing of Comparisons, Swaps, and Recursive Calls
+- Visualize O(n log n) vs O(n²) behavior as array size increases
+- Dynamic chart updates during execution
+
+### 2. **Advanced Memory Visualization 🧠**
+- Real-time Stock & Heap memory tracking
+- Visual Call Stack growth/shrinkage for recursive algorithms
+- Detailed view of memory allocation per step
+
+### 3. **Worst Case Generator ⚠️**
+- One-click generation of pathological inputs
+- Examples: Quick Sort (sorted array), BST (skewed tree), Hash Table (collisions)
+- Educational focus on "Why this input breaks the algorithm"
+
+### 4. **Public Algorithm Gallery 🌍**
+- Community platform for sharing custom inputs and algorithms
+- User-submitted challenges and test cases
+- Like/Star system for popular content
+
+### 5. **"What You Learned" & Analytics Panel 🎓**
+- Contextual guide: When to use (and NOT use) the current algorithm
+- Alternatives and Trade-offs section
+- **Performance Dashboard**: Side-by-side comparison table of Comparisons, Swaps, and Execution Time
+
+### 6. **User-Written Code Execution 👨‍💻**
 - Code editor for users to write their own algorithms
 - Syntax checking and error highlighting
 - Execute custom code with the same visualization system
 - Compare user solutions with optimal implementations
 
-### 2. **Enhanced Tree Data Structures**
+### 7. **Enhanced Tree Data Structures 🌳**
 - AVL Tree with rotation visualization
 - Red-Black Tree visualization
 
-
-### 3. **Interactive Quiz Mode**
+### 8. **Interactive Quiz Mode ❓**
 - Predict-the-next-step challenges
 - Complexity estimation questions
 - Algorithm selection for given problems
 - Score tracking and learning progress
+
+### 9. **Backend Integration & User Accounts 🔐**
+- **User Authentication**: Login/Register, Progress tracking, Favorites
+- **Persistent State**: Save and resume visualization sessions
+- **Tech Stack**: Node.js + Express + PostgreSQL/MongoDB
+
+### 10. **Shareable Visualization Links 🔗**
+- Generate unique URLs for specific algorithm states (e.g., `/share/quick-sort/abc123`)
+- Share custom inputs, execution speeds, and visualization settings with peers
+- "Deep Link" directly to a specific step in the algorithm
+
+### 11. **Platform Analytics & Insights 📊**
+- Track most popular algorithms and average session times
+- User interaction heatmaps to identify where learners get stuck
+- **Monetization Potential**: Premium features based on advanced analytics
+
+### 12. **Community Content Hub 🏘️**
+- Save and publish user-created algorithms and test cases
+- Community voting and filtering for best educational examples
+- Transform from a simple tool into a comprehensive **Educational Platform**
+
+
 
 ## 📝 License
 

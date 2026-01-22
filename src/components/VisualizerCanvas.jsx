@@ -44,7 +44,17 @@ const VisualizerCanvas = ({
 
             {/* Description & Code */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                <StepDescription description={currentStepData.description} />
+                <div className="flex flex-col gap-6">
+                    <StepDescription description={currentStepData.description} />
+                    {currentStepData.code && (
+                        <div className="bg-gray-900/40 backdrop-blur-xl border border-fuchsia-500/20 rounded-2xl p-6">
+                            <h3 className="text-sm font-semibold text-fuchsia-400 mb-3">Code Execution</h3>
+                            <div className="bg-black/80 border border-gray-800 rounded-lg p-4 font-mono text-sm text-emerald-400 shadow-inner">
+                                {currentStepData.code}
+                            </div>
+                        </div>
+                    )}
+                </div>
                 <CodeDisplay
                     code={currentStepData.code}
                     pseudocode={PSEUDOCODE[algorithm]}

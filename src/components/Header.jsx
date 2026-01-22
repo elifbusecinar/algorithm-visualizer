@@ -1,5 +1,5 @@
 import React from 'react';
-import { Code2 } from 'lucide-react';
+import { Code2, Github } from 'lucide-react';
 
 const Header = ({ currentStep, totalSteps, onCompareMode }) => {
   return (
@@ -18,6 +18,15 @@ const Header = ({ currentStep, totalSteps, onCompareMode }) => {
             </div>
           </div>
           <div className="flex items-center gap-4 text-sm">
+            <a
+              href="https://github.com/elifbusecinar"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-2 bg-gray-800/40 hover:bg-gray-800/60 text-gray-400 hover:text-white border border-gray-700/50 rounded-full transition-colors"
+              title="View on GitHub"
+            >
+              <Github className="w-5 h-5" />
+            </a>
             <button
               onClick={onCompareMode}
               className="px-4 py-1.5 bg-fuchsia-500/10 hover:bg-fuchsia-500/20 text-fuchsia-400 hover:text-fuchsia-300 border border-fuchsia-500/20 rounded-lg transition-colors font-medium flex items-center gap-2"
@@ -25,9 +34,10 @@ const Header = ({ currentStep, totalSteps, onCompareMode }) => {
               <Code2 className="w-4 h-4" />
               Compare Algorithms
             </button>
-            <div className="px-3 py-1.5 bg-fuchsia-500/10 rounded-lg border border-fuchsia-500/20">
-              <span className="text-fuchsia-400">Step {currentStep + 1}</span>
-              <span className="text-fuchsia-300/40"> / {totalSteps}</span>
+            <div className="px-2.5 py-0.5 bg-fuchsia-500/5 rounded-full border border-fuchsia-500/10 text-[11px] font-mono flex items-center gap-1.5">
+              <span className="text-fuchsia-400 font-semibold">Step {currentStep + 1}</span>
+              <span className="text-fuchsia-300/30">/</span>
+              <span className="text-fuchsia-300/50">{totalSteps}</span>
             </div>
           </div>
         </div>

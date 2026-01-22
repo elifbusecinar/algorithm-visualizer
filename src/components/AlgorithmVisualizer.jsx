@@ -95,6 +95,7 @@ const AlgorithmVisualizer = () => {
         currentStep={currentStep}
         totalSteps={steps.length}
         onCompareMode={() => setMode('compare')}
+        currentStepCode={currentStepData?.code}
       />
 
       <div className="max-w-7xl mx-auto px-6 py-8">
