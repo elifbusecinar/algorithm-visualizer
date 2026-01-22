@@ -18,6 +18,7 @@ Experience the visualizer live: [Algorithm Visualizer](https://algorithm-visuali
 - **Interactive Pseudocode Viewer**: View and track algorithm pseudocode execution in real-time
 - **Recursive Call Stack Visualization**: Visualizes the call stack growth and shrinkage for recursive algorithms (Merge Sort, Quick Sort)
 - **Linked List Visualization**: Dynamic, arrow-based visualization for linked list operations
+- **Pathfinding Visualizer (Grid)**: Visualize Dijkstra's Algorithm on a 2D grid with walls and weighted nodes
 - **Algorithm Comparison Mode**: Side-by-side performance comparison of different algorithms on the same dataset
 
 ## 🛠️ Technologies Used
@@ -26,6 +27,7 @@ Experience the visualizer live: [Algorithm Visualizer](https://algorithm-visuali
 - **Tailwind CSS** - Utility-first styling with custom fuchsia theme
 - **Vite** - Fast development environment and optimized builds
 - **Lucide React** - Beautiful, consistent icon system
+- **Framer Motion** - Smooth animations for grid interactions
 
 ## 📦 Installation
 
@@ -57,6 +59,9 @@ The application will be available at `http://localhost:5173`
 ### Searching Algorithms
 - [x] **Binary Search** - Logarithmic search on sorted arrays
 
+### Pathfinding Algorithms
+- [x] **Dijkstra's Algorithm** - Shortest path in a weighted graph
+
 ### Problem-Solving Algorithms
 - [x] **Two Sum** - Hash map approach for pair finding
 - [x] **Container With Most Water** - Two pointer optimization
@@ -77,10 +82,9 @@ The application will be available at `http://localhost:5173`
 - Execute custom code with the same visualization system
 - Compare user solutions with optimal implementations
 
-### 2. **Pathfinding Algorithms**
-- Dijkstra's Algorithm
-- A* Search
-- Grid-based visualizations with obstacles
+### 2. **A* Search Algorithm**
+- Heuristic-based pathfinding
+- Comparison with Dijkstra
 
 ### 3. **Tree Data Structures**
 - Binary Search Tree (BST) operations (Insert, Delete, Search)

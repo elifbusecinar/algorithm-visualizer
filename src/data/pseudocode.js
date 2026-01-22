@@ -175,5 +175,21 @@ export const PSEUDOCODE = {
         "      swap(nums[lastNonZeroFoundAt], nums[cur])",
         "      lastNonZeroFoundAt++",
         "  return nums"
+    ],
+    dijkstra: [
+        "function Dijkstra(Graph, source):",
+        "  dist[source] = 0",
+        "  for each vertex v in Graph:",
+        "    if v != source: dist[v] = infinity",
+        "    add v to Q",
+        "  while Q is not empty:",
+        "    u = vertex in Q with min dist[u]",
+        "    remove u from Q",
+        "    for each neighbor v of u:",
+        "      alt = dist[u] + length(u, v)",
+        "      if alt < dist[v]:",
+        "        dist[v] = alt",
+        "        prev[v] = u",
+        "  return dist, prev"
     ]
 };

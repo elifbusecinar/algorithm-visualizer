@@ -15,6 +15,7 @@ import { generateReverseLinkedListSteps } from '../algorithms/reverseLinkedList'
 import { generateClimbingStairsSteps } from '../algorithms/climbingStairs';
 import { generateContainerWithMostWaterSteps } from '../algorithms/containerWithMostWater';
 import { generateMoveZeroesSteps } from '../algorithms/moveZeroes';
+import { generateDijkstraSteps } from '../algorithms/dijkstra';
 
 export const useAlgorithmLogic = ({
     algorithm,
@@ -80,6 +81,9 @@ export const useAlgorithmLogic = ({
                 break;
             case 'moveZeroes':
                 generatedSteps = generateMoveZeroesSteps(inputArray);
+                break;
+            case 'dijkstra':
+                generatedSteps = generateDijkstraSteps();
                 break;
             default:
                 generatedSteps = [];

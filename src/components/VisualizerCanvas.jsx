@@ -2,14 +2,18 @@ import React from 'react';
 import ArrayVisualizer from './ArrayVisualizer';
 import DataStructurePanel from './DataStructurePanel';
 import StepDescription from './StepDescription';
+import GridVisualizer from './GridVisualizer'; // [NEW]
 import CodeDisplay from './CodeDisplay';
 import { PSEUDOCODE } from '../data/pseudocode';
+import { ALGORITHMS } from '../utils/constants';
 
 const VisualizerCanvas = ({
     algorithm,
     currentStepData,
     title // Optional title for Comparison Mode headers
 }) => {
+    const isGridAlgorithm = ALGORITHMS[algorithm]?.type === 'grid';
+
     return (
         <div className="flex flex-col gap-6">
             {title && (
@@ -20,9 +24,13 @@ const VisualizerCanvas = ({
 
             {/* Main Visualization Area */}
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                {/* Array Visualizer takes more space */}
-                <div className="lg:col-span-2 flex flex-col">
-                    <ArrayVisualizer stepData={currentStepData} />
+                {/* Visualizer (Array or Grid) */}
+                <div className="lg:col-span-2 flex flex-col min-h-[400px]">
+                    {isGridAlgorithm ? (
+                        <GridVisualizer stepData={currentStepData} />
+                    ) : (
+                        <ArrayVisualizer stepData={currentStepData} />
+                    )}
                 </div>
                 {/* Info Panel takes less space */}
                 <div className="lg:col-span-1 flex flex-col">

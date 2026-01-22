@@ -325,6 +325,31 @@ export const ALGORITHMS = {
       - non_zero_ptr++
 3. Return nums
     `
+  },
+  dijkstra: {
+    name: "Dijkstra's Algorithm",
+    type: 'grid',
+    complexity: 'O(E log V)',
+    timeComplexity: {
+      best: 'O(E log V)',
+      average: 'O(E log V)',
+      worst: 'O(E log V)'
+    },
+    spaceComplexity: 'O(V)',
+    description: 'Finds the shortest path between nodes in a graph (grids included)',
+    category: 'Pathfinding',
+    pseudocode: `
+1. Init dist[] = Infinity, dist[start] = 0
+2. Priority Queue Q, add start
+3. While Q is not empty:
+   a. u = Q.extractMin()
+   b. For each neighbor v of u:
+      - alt = dist[u] + weight(u, v)
+      - If alt < dist[v]:
+         - dist[v] = alt
+         - prev[v] = u
+         - Q.add(v)
+    `
   }
 };
 
