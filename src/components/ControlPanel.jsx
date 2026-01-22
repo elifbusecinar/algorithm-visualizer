@@ -252,7 +252,7 @@ const ControlPanel = ({
       )}
 
       {/* Target Input or Speed Control */}
-      {(algorithm === 'twoSum' || algorithm === 'binarySearch') ? (
+      {['twoSum', 'binarySearch', 'bstSearch', 'bstDelete'].includes(algorithm) ? (
         <div className="bg-gray-900/40 backdrop-blur-xl border border-fuchsia-500/20 rounded-2xl p-5">
           <label className="flex items-center gap-2 text-sm font-semibold text-fuchsia-300 mb-3">
             <TrendingUp className="w-4 h-4" />
@@ -265,7 +265,9 @@ const ControlPanel = ({
             className="w-full bg-gray-800/60 text-white rounded-xl px-4 py-3 border border-fuchsia-500/30 focus:outline-none focus:border-fuchsia-500 focus:ring-2 focus:ring-fuchsia-500/20 transition-all font-mono text-2xl"
           />
           <div className="mt-3 mb-5 text-xs text-fuchsia-300/50">
-            {algorithm === 'twoSum' ? 'Find two numbers that sum to this value' : 'Value to search for in the array'}
+            {algorithm === 'twoSum'
+              ? 'Find two numbers that sum to this value'
+              : 'Value to search for or delete in the tree'}
           </div>
 
           {/* Speed Control for algorithms with target */}

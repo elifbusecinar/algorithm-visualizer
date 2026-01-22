@@ -67,12 +67,12 @@ const flattenTree = (root) => {
         });
 
         if (node.left) {
-            edges.push({ from: node.id, to: node.left.id });
+            edges.push({ source: node.id, target: node.left.id });
             traverse(node.left);
         }
 
         if (node.right) {
-            edges.push({ from: node.id, to: node.right.id });
+            edges.push({ source: node.id, target: node.right.id });
             traverse(node.right);
         }
     };
@@ -82,11 +82,11 @@ const flattenTree = (root) => {
 };
 
 // BST Search - find a target value
-const searchBST = (node, target, steps) => {
+const searchBST = (node, target, steps, root) => {
     if (!node) {
         steps.push({
             description: `Reached null node. Value ${target} not found in tree.`,
-            ...flattenTree(node),
+            ...flattenTree(root),
             currentNode: null,
             found: false,
             code: 'return null',
@@ -100,6 +100,7 @@ const searchBST = (node, target, steps) => {
     steps.push({
         description: `Comparing ${target} with ${node.value}`,
         currentNode: node.id,
+        ...flattenTree(root),
         code: `if (${target} == ${node.value})`,
         lineIndex: 2
     });
@@ -109,6 +110,7 @@ const searchBST = (node, target, steps) => {
         steps.push({
             description: `✓ Found ${target}!`,
             currentNode: node.id,
+            ...flattenTree(root),
             found: true,
             code: `return node`,
             lineIndex: 3
@@ -118,18 +120,20 @@ const searchBST = (node, target, steps) => {
         steps.push({
             description: `${target} < ${node.value}, searching left subtree`,
             currentNode: node.id,
+            ...flattenTree(root),
             code: `search(node.left, ${target})`,
             lineIndex: 4
         });
-        return searchBST(node.left, target, steps);
+        return searchBST(node.left, target, steps, root);
     } else {
         steps.push({
             description: `${target} > ${node.value}, searching right subtree`,
             currentNode: node.id,
+            ...flattenTree(root),
             code: `search(node.right, ${target})`,
             lineIndex: 5
         });
-        return searchBST(node.right, target, steps);
+        return searchBST(node.right, target, steps, root);
     }
 };
 
@@ -156,12 +160,7 @@ export const generateBSTSearchSteps = (inputArray, target = null) => {
     });
 
     // Perform search
-    searchBST(root, target, steps);
+    searchBST(root, target, steps, root);
 
-    // Update all steps with tree structure
-    return steps.map(step => ({
-        ...step,
-        ...flattenTree(root),
-        target: target
-    }));
+    return steps;
 };

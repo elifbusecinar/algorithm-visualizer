@@ -655,6 +655,8 @@ export const DEFAULT_ARRAYS = {
 
 export const DEFAULT_INPUTS = {
   binarySearch: { target: 7 },
+  bstSearch: { target: 60 },
+  bstDelete: { target: 20 },
   validParentheses: { input: '({[]})' },
   longestSubstring: { input: 'abcabcbb' },
   climbingStairs: { n: 5 }

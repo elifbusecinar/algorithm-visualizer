@@ -110,9 +110,9 @@ All algorithms feature:
 - Compare user solutions with optimal implementations
 
 ### 2. **Enhanced Tree Data Structures**
-- Binary Search Tree operations (Delete, Search)
 - AVL Tree with rotation visualization
-- Tree Traversal Visualizations (In-order, Pre-order, Post-order, BFS/DFS)
+- Red-Black Tree visualization
+
 
 ### 3. **Interactive Quiz Mode**
 - Predict-the-next-step challenges

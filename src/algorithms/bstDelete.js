@@ -67,12 +67,12 @@ const flattenTree = (root) => {
         });
 
         if (node.left) {
-            edges.push({ from: node.id, to: node.left.id });
+            edges.push({ source: node.id, target: node.left.id });
             traverse(node.left);
         }
 
         if (node.right) {
-            edges.push({ from: node.id, to: node.right.id });
+            edges.push({ source: node.id, target: node.right.id });
             traverse(node.right);
         }
     };
@@ -90,10 +90,12 @@ const findMin = (node) => {
 };
 
 // BST Delete - remove a node from the tree
-const deleteBST = (node, target, steps, parent = null) => {
+// BST Delete - remove a node from the tree
+const deleteBST = (node, target, steps, root) => {
     if (!node) {
         steps.push({
             description: `Value ${target} not found in tree`,
+            ...flattenTree(root),
             code: 'return null',
             lineIndex: 8
         });
@@ -105,15 +107,16 @@ const deleteBST = (node, target, steps, parent = null) => {
     steps.push({
         description: `Searching for ${target}, currently at ${node.value}`,
         currentNode: node.id,
+        ...flattenTree(root),
         code: `if (${target} < ${node.value})`,
         lineIndex: 2
     });
 
     if (target < node.value) {
-        node.left = deleteBST(node.left, target, steps, node);
+        node.left = deleteBST(node.left, target, steps, root);
         return node;
     } else if (target > node.value) {
-        node.right = deleteBST(node.right, target, steps, node);
+        node.right = deleteBST(node.right, target, steps, root);
         return node;
     }
 
@@ -122,6 +125,7 @@ const deleteBST = (node, target, steps, parent = null) => {
     steps.push({
         description: `Found node ${target} to delete`,
         currentNode: node.id,
+        ...flattenTree(root),
         code: `// Node found`,
         lineIndex: 3
     });
@@ -131,6 +135,7 @@ const deleteBST = (node, target, steps, parent = null) => {
         steps.push({
             description: `Case 1: ${target} is a leaf node. Simply remove it.`,
             currentNode: node.id,
+            ...flattenTree(root),
             code: 'return null',
             lineIndex: 4
         });
@@ -142,6 +147,7 @@ const deleteBST = (node, target, steps, parent = null) => {
         steps.push({
             description: `Case 2: ${target} has only right child. Replace with right child.`,
             currentNode: node.id,
+            ...flattenTree(root),
             code: 'return node.right',
             lineIndex: 5
         });
@@ -152,6 +158,7 @@ const deleteBST = (node, target, steps, parent = null) => {
         steps.push({
             description: `Case 2: ${target} has only left child. Replace with left child.`,
             currentNode: node.id,
+            ...flattenTree(root),
             code: 'return node.left',
             lineIndex: 6
         });
@@ -162,6 +169,7 @@ const deleteBST = (node, target, steps, parent = null) => {
     steps.push({
         description: `Case 3: ${target} has two children. Find in-order successor (min in right subtree).`,
         currentNode: node.id,
+        ...flattenTree(root),
         code: 'successor = findMin(node.right)',
         lineIndex: 7
     });
@@ -171,6 +179,7 @@ const deleteBST = (node, target, steps, parent = null) => {
     steps.push({
         description: `Found successor: ${successor.value}. Replace ${target} with ${successor.value}.`,
         currentNode: node.id,
+        ...flattenTree(root),
         code: `node.value = ${successor.value}`,
         lineIndex: 8
     });
@@ -181,11 +190,12 @@ const deleteBST = (node, target, steps, parent = null) => {
     steps.push({
         description: `Now delete the successor ${successor.value} from right subtree`,
         currentNode: node.id,
+        ...flattenTree(root),
         code: `delete(node.right, ${successor.value})`,
         lineIndex: 9
     });
 
-    node.right = deleteBST(node.right, successor.value, steps, node);
+    node.right = deleteBST(node.right, successor.value, steps, root);
 
     return node;
 };
@@ -212,7 +222,14 @@ export const generateBSTDeleteSteps = (inputArray, target = null) => {
     });
 
     // Perform deletion
-    root = deleteBST(root, target, steps);
+    // Perform deletion
+    // Pass root to tracking function to visualize full tree at each step
+    const deletionResult = deleteBST(root, target, steps, root);
+
+    // If we have a new root (e.g. root was deleted/replaced), use it for final step
+    // Note: deleteBST modifies the tree in-place where possible, but returns new node reference for parent 
+    root = deletionResult;
+
     calculatePositions(root);
 
     steps.push({
@@ -224,10 +241,5 @@ export const generateBSTDeleteSteps = (inputArray, target = null) => {
         lineIndex: 10
     });
 
-    // Update all steps with tree structure
-    return steps.map((step, index) => ({
-        ...step,
-        ...flattenTree(root),
-        target: target
-    }));
+    return steps;
 };

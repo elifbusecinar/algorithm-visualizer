@@ -259,5 +259,64 @@ export const PSEUDOCODE = {
         "  else if value > node.value:",
         "    node.right = Insert(node.right, value)",
         "  return node"
+    ],
+    bstSearch: [
+        "function searchBST(node, target):",
+        "  if node is null:",
+        "    return null (not found)",
+        "  if target == node.value:",
+        "    return node (found)",
+        "  if target < node.value:",
+        "    return searchBST(node.left, target)",
+        "  else:",
+        "    return searchBST(node.right, target)"
+    ],
+    bstDelete: [
+        "function deleteBST(node, target):",
+        "  if node is null: return null",
+        "  if target < node.value:",
+        "    node.left = deleteBST(node.left, target)",
+        "  else if target > node.value:",
+        "    node.right = deleteBST(node.right, target)",
+        "  else:",
+        "    // Node found",
+        "    if node is leaf: return null",
+        "    if node has one child: return child",
+        "    // Two children",
+        "    successor = findMin(node.right)",
+        "    node.value = successor.value",
+        "    node.right = deleteBST(node.right, successor.value)",
+        "  return node"
+    ],
+    inOrderTraversal: [
+        "function inOrder(node):",
+        "  if node is null: return",
+        "  inOrder(node.left)",
+        "  visit(node)",
+        "  inOrder(node.right)"
+    ],
+    preOrderTraversal: [
+        "function preOrder(node):",
+        "  if node is null: return",
+        "  visit(node)",
+        "  preOrder(node.left)",
+        "  preOrder(node.right)"
+    ],
+    postOrderTraversal: [
+        "function postOrder(node):",
+        "  if node is null: return",
+        "  postOrder(node.left)",
+        "  postOrder(node.right)",
+        "  visit(node)"
+    ],
+    levelOrderTraversal: [
+        "function levelOrder(root):",
+        "  if root is null: return",
+        "  queue = [root]",
+        "  while queue is not empty:",
+        "    node = queue.shift()",
+        "    visit(node)",
+        "    if node.left: queue.push(node.left)",
+        "    if node.right: queue.push(node.right)"
     ]
 };

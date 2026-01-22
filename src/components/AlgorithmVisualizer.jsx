@@ -11,7 +11,7 @@ import StepDescription from './StepDescription';
 import CodeDisplay from './CodeDisplay';
 import Controls from './Controls';
 import { useAlgorithmLogic } from '../hooks/useAlgorithmLogic';
-import { ALGORITHMS, SPEEDS, DEFAULT_ARRAYS } from '../utils/constants';
+import { ALGORITHMS, SPEEDS, DEFAULT_ARRAYS, DEFAULT_INPUTS } from '../utils/constants';
 import ComplexityPanel from './ComplexityPanel';
 import ComparisonView from './ComparisonView';
 import VisualizerCanvas from './VisualizerCanvas';
@@ -62,6 +62,9 @@ const AlgorithmVisualizer = () => {
   useEffect(() => {
     if (DEFAULT_ARRAYS[algorithm]) {
       setInputArray(DEFAULT_ARRAYS[algorithm]);
+    }
+    if (DEFAULT_INPUTS[algorithm] && DEFAULT_INPUTS[algorithm].target !== undefined) {
+      setTarget(DEFAULT_INPUTS[algorithm].target);
     }
   }, [algorithm]);
 
