@@ -153,5 +153,27 @@ export const PSEUDOCODE = {
         "      i++, swap(arr[i], arr[j])",
         "  swap(arr[i + 1], arr[high])",
         "  return i + 1"
+    ],
+    containerWithMostWater: [
+        "function maxArea(height):",
+        "  left = 0, right = height.length - 1",
+        "  max_area = 0",
+        "  while left < right:",
+        "    current_area = min(height[left], height[right]) * (right - left)",
+        "    max_area = max(max_area, current_area)",
+        "    if height[left] < height[right]:",
+        "      left++",
+        "    else:",
+        "      right--",
+        "  return max_area"
+    ],
+    moveZeroes: [
+        "function moveZeroes(nums):",
+        "  lastNonZeroFoundAt = 0",
+        "  for cur from 0 to nums.length:",
+        "    if nums[cur] != 0:",
+        "      swap(nums[lastNonZeroFoundAt], nums[cur])",
+        "      lastNonZeroFoundAt++",
+        "  return nums"
     ]
 };

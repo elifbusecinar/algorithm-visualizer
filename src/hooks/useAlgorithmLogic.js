@@ -13,6 +13,8 @@ import { generateBestTimeToBuySellStockSteps } from '../algorithms/bestTimeToBuy
 import { generateLongestSubstringSteps } from '../algorithms/longestSubstring';
 import { generateReverseLinkedListSteps } from '../algorithms/reverseLinkedList';
 import { generateClimbingStairsSteps } from '../algorithms/climbingStairs';
+import { generateContainerWithMostWaterSteps } from '../algorithms/containerWithMostWater';
+import { generateMoveZeroesSteps } from '../algorithms/moveZeroes';
 
 export const useAlgorithmLogic = ({
     algorithm,
@@ -21,7 +23,8 @@ export const useAlgorithmLogic = ({
     binarySearchTarget,
     parenString,
     longestSubString,
-    climbStairs
+    climbStairs,
+    prices
 }) => {
     const [steps, setSteps] = useState([]);
     const [currentStep, setCurrentStep] = useState(0);
@@ -72,13 +75,19 @@ export const useAlgorithmLogic = ({
             case 'climbingStairs':
                 generatedSteps = generateClimbingStairsSteps(climbStairs);
                 break;
+            case 'containerWithMostWater':
+                generatedSteps = generateContainerWithMostWaterSteps(inputArray);
+                break;
+            case 'moveZeroes':
+                generatedSteps = generateMoveZeroesSteps(inputArray);
+                break;
             default:
                 generatedSteps = [];
         }
 
         setSteps(generatedSteps);
         setCurrentStep(0);
-    }, [algorithm, inputArray, target, binarySearchTarget, parenString, longestSubString, climbStairs]);
+    }, [algorithm, inputArray, target, binarySearchTarget, parenString, longestSubString, climbStairs, prices]);
 
     const currentStepData = steps[currentStep] || {};
 

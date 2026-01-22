@@ -282,6 +282,49 @@ export const ALGORITHMS = {
    a. dp[i] = dp[i-1] + dp[i-2]
 5. Return dp[n-1]
     `
+  },
+  containerWithMostWater: {
+    name: 'Container With Most Water',
+    complexity: 'O(n)',
+    timeComplexity: {
+      best: 'O(n)',
+      average: 'O(n)',
+      worst: 'O(n)'
+    },
+    spaceComplexity: 'O(1)',
+    description: 'Find two lines that together with the x-axis form a container, such that the container contains the most water.',
+    category: 'Two Pointers',
+    pseudocode: `
+1. Initialize left = 0, right = n-1, max_area = 0
+2. While left < right:
+   a. current_area = min(height[left], height[right]) * (right - left)
+   b. max_area = max(max_area, current_area)
+   c. If height[left] < height[right]:
+      - left++
+   d. Else:
+      - right--
+3. Return max_area
+    `
+  },
+  moveZeroes: {
+    name: 'Move Zeroes',
+    complexity: 'O(n)',
+    timeComplexity: {
+      best: 'O(n)',
+      average: 'O(n)',
+      worst: 'O(n)'
+    },
+    spaceComplexity: 'O(1)',
+    description: 'Move all 0s to the end while maintaining the relative order of the non-zero elements.',
+    category: 'Array',
+    pseudocode: `
+1. Initialize non_zero_ptr = 0
+2. For current = 0 to n-1:
+   a. If nums[current] != 0:
+      - Swap nums[current] and nums[non_zero_ptr]
+      - non_zero_ptr++
+3. Return nums
+    `
   }
 };
 
@@ -302,7 +345,9 @@ export const DEFAULT_ARRAYS = {
   quickSort: [10, 7, 8, 9, 1, 5],
   insertionSort: [12, 11, 13, 5, 6],
   bestTimeToBuySellStock: [7, 1, 5, 3, 6, 4],
-  reverseLinkedList: [1, 2, 3, 4, 5]
+  reverseLinkedList: [1, 2, 3, 4, 5],
+  containerWithMostWater: [1, 8, 6, 2, 5, 4, 8, 3, 7],
+  moveZeroes: [0, 1, 0, 3, 12]
 };
 
 export const DEFAULT_INPUTS = {

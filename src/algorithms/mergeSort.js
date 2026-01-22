@@ -10,8 +10,26 @@ export const generateMergeSortSteps = (arr) => {
         lineIndex: 0
     });
 
+    let stack = [];
+
     const mergeSort = (arr, start = 0, end = arr.length - 1, depth = 0) => {
-        if (start >= end) return;
+        // Push to stack
+        stack.push({ name: 'mergeSort', args: `[${start}..${end}]` });
+
+        if (start >= end) {
+            steps.push({
+                description: start === end
+                    ? `Base case reached: Single element [${arr[start]}] is already sorted`
+                    : `Base case: Empty range`,
+                array: [...array],
+                highlight: [start],
+                code: 'if (start >= end) return;',
+                lineIndex: 1,
+                callStack: [...stack] // Snapshot of stack
+            });
+            stack.pop();
+            return;
+        }
 
         const mid = Math.floor((start + end) / 2);
 
@@ -22,18 +40,26 @@ export const generateMergeSortSteps = (arr) => {
             dividing: { start, mid, end },
             depth,
             code: `mid = (${start} + ${end}) / 2 = ${mid}`,
-            lineIndex: 2
+            lineIndex: 2,
+            callStack: [...stack]
         });
 
         mergeSort(arr, start, mid, depth + 1);
         mergeSort(arr, mid + 1, end, depth + 1);
 
         merge(arr, start, mid, end, depth);
+
+        // Pop from stack when function returns
+        stack.pop();
     };
 
     const merge = (arr, start, mid, end, depth) => {
         const left = arr.slice(start, mid + 1);
         const right = arr.slice(mid + 1, end + 1);
+
+        // Merge is technically a helper, we can maybe show it in stack or just keep mergeSort in stack
+        // Let's keep just mergeSort in stack for clarity, or add 'merge' temporarily
+        stack.push({ name: 'merge', args: `[${start}..${end}]` });
 
         steps.push({
             description: `Merging subarrays [${left.join(', ')}] and [${right.join(', ')}]`,
@@ -42,7 +68,8 @@ export const generateMergeSortSteps = (arr) => {
             merging: { start, mid, end, left, right },
             depth,
             code: `merge(left, right)`,
-            lineIndex: 7
+            lineIndex: 7,
+            callStack: [...stack]
         });
 
         let i = 0, j = 0, k = start;
@@ -63,7 +90,8 @@ export const generateMergeSortSteps = (arr) => {
                 merging: { start, mid, end },
                 depth,
                 code: `arr[${k}] = ${array[k]}`,
-                lineIndex: 12
+                lineIndex: 12,
+                callStack: [...stack]
             });
             k++;
         }
@@ -76,7 +104,8 @@ export const generateMergeSortSteps = (arr) => {
                 highlight: [k],
                 depth,
                 code: `arr[${k}] = ${array[k]}`,
-                lineIndex: 16
+                lineIndex: 16,
+                callStack: [...stack]
             });
             i++;
             k++;
@@ -90,7 +119,8 @@ export const generateMergeSortSteps = (arr) => {
                 highlight: [k],
                 depth,
                 code: `arr[${k}] = ${array[k]}`,
-                lineIndex: 16
+                lineIndex: 16,
+                callStack: [...stack]
             });
             j++;
             k++;
@@ -103,8 +133,11 @@ export const generateMergeSortSteps = (arr) => {
             sorted: Array.from({ length: end - start + 1 }, (_, i) => start + i),
             depth,
             code: '// Merge complete',
-            lineIndex: 6
+            lineIndex: 6,
+            callStack: [...stack]
         });
+
+        stack.pop(); // Pop 'merge'
     };
 
     mergeSort(array, 0, array.length - 1, 0);

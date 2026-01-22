@@ -1,23 +1,33 @@
 import React from 'react';
 import { BarChart3, TrendingUp, CheckCircle, Layers } from 'lucide-react';
+import CallStackVisualizer from './CallStackVisualizer';
 
 const DataStructurePanel = ({ stepData }) => {
   const hasMap = stepData.map !== undefined;
   const hasSet = stepData.set !== undefined;
-  const hasStack = stepData.stack !== undefined;
+  const hasStack = stepData.stack !== undefined; // For simple stack usage (valid parentheses)
+  const hasCallStack = stepData.callStack !== undefined; // For recursive call stack
   const hasSwaps = stepData.swaps !== undefined;
   const hasSorted = stepData.sorted && stepData.sorted.length > 0;
   const hasPointers = stepData.pointers !== undefined;
   const hasMaxSum = stepData.maxSum !== undefined;
   const hasNodes = stepData.nodes !== undefined;
   const hasDP = stepData.dp !== undefined;
+  const hasMaxArea = stepData.maxArea !== undefined;
   const isComplete = stepData.complete;
 
   return (
     <div className="bg-gray-900/40 backdrop-blur-xl border border-fuchsia-500/20 rounded-2xl p-6">
       <h3 className="text-lg font-bold text-fuchsia-300 mb-4">
-        {hasMap ? 'HashMap' : hasSet ? 'Set' : hasStack ? 'Stack' : hasNodes ? 'Linked List Info' : hasDP ? 'Dynamic Programming Info' : 'Algorithm Info'}
+        {hasCallStack ? 'Recursive Call Stack' : hasMap ? 'HashMap' : hasSet ? 'Set' : hasStack ? 'Stack' : hasNodes ? 'Linked List Info' : hasDP ? 'Dynamic Programming Info' : 'Algorithm Info'}
       </h3>
+
+      {/* Recursive Call Stack Display */}
+      {hasCallStack && (
+        <div className="mb-4">
+          <CallStackVisualizer callStack={stepData.callStack} />
+        </div>
+      )}
 
       {/* HashMap Display */}
       {hasMap && (
@@ -207,6 +217,28 @@ const DataStructurePanel = ({ stepData }) => {
             </div>
           )}
 
+          {/* Container With Most Water Info */}
+          {hasMaxArea && (
+            <div className="space-y-3">
+              <div className="bg-fuchsia-500/10 px-4 py-3 rounded-lg border border-fuchsia-500/20">
+                <div className="flex items-center gap-2 mb-1">
+                  <TrendingUp className="w-4 h-4 text-fuchsia-400" />
+                  <span className="text-sm text-fuchsia-300 font-semibold">Max Area</span>
+                </div>
+                <div className="text-2xl font-bold text-white">{stepData.maxArea}</div>
+              </div>
+              {stepData.currentArea !== undefined && (
+                <div className="bg-cyan-500/10 px-4 py-3 rounded-lg border border-cyan-500/20">
+                  <div className="flex items-center gap-2 mb-1">
+                    <BarChart3 className="w-4 h-4 text-cyan-400" />
+                    <span className="text-sm text-cyan-300 font-semibold">Current Area</span>
+                  </div>
+                  <div className="text-2xl font-bold text-white">{stepData.currentArea}</div>
+                </div>
+              )}
+            </div>
+          )}
+
           {/* DP Info */}
           {hasDP && (
             <div className="space-y-3">
@@ -283,7 +315,7 @@ const DataStructurePanel = ({ stepData }) => {
           )}
 
           {/* Array Size */}
-          {stepData.array && !hasPointers && !hasMaxSum && (
+          {stepData.array && !hasPointers && !hasMaxSum && !hasCallStack && (
             <div className="bg-cyan-500/10 px-4 py-3 rounded-lg border border-cyan-500/20">
               <div className="flex items-center gap-2 mb-1">
                 <BarChart3 className="w-4 h-4 text-cyan-400" />

@@ -12,12 +12,12 @@ Experience the visualizer live: [Algorithm Visualizer](https://algorithm-visuali
 - **Customizable Inputs**: Modify array values and algorithm parameters in real-time
 - **Beautiful Dark Mode UI**: Modern, fuchsia-themed interface with smooth animations
 - **Speed Control**: Adjust animation speed to match your learning pace
-- **Speed Control**: Adjust animation speed to match your learning pace
 - **Responsive Design**: Works seamlessly across desktop and mobile devices
 - **Complexity Analysis Panel**: View detailed Time and Space complexity (Best/Avg/Worst) for each algorithm
 - **Edge Case Testing Mode**: Quickly load preset inputs (e.g., Sorted, Reverse Sorted) to test algorithm behavior
-- **Interactive Pseudocode Viewer**: View and track algorithm pseudocode execution in real-time (Available for all supported algorithms)
-- **Linked List Visualization**: Dynamic, arrow-based visualization for linked list operations (e.g., Reverse Linked List)
+- **Interactive Pseudocode Viewer**: View and track algorithm pseudocode execution in real-time
+- **Recursive Call Stack Visualization**: Visualizes the call stack growth and shrinkage for recursive algorithms (Merge Sort, Quick Sort)
+- **Linked List Visualization**: Dynamic, arrow-based visualization for linked list operations
 - **Algorithm Comparison Mode**: Side-by-side performance comparison of different algorithms on the same dataset
 
 ## 🛠️ Technologies Used
@@ -59,6 +59,8 @@ The application will be available at `http://localhost:5173`
 
 ### Problem-Solving Algorithms
 - [x] **Two Sum** - Hash map approach for pair finding
+- [x] **Container With Most Water** - Two pointer optimization
+- [x] **Move Zeroes** - In-place array manipulation
 - [x] **Contains Duplicate** - Efficient duplicate detection
 - [x] **Maximum Subarray** - Kadane's algorithm
 - [x] **Longest Substring Without Repeating** - Sliding window technique
@@ -69,28 +71,22 @@ The application will be available at `http://localhost:5173`
 
 ## 🚀 Planned Features
 
-### 1. **Recursive Call Stack Visualization**
-- Dynamic call stack display for recursive algorithms
-- Frame-by-frame stack growth and collapse
-- Variable state at each recursion level
-- Visual representation of recursion tree
-
-### 2. **User-Written Code Execution**
+### 1. **User-Written Code Execution**
 - Code editor for users to write their own algorithms
 - Syntax checking and error highlighting
 - Execute custom code with the same visualization system
 - Compare user solutions with optimal implementations
 
-### 3. **Pathfinding Algorithms**
+### 2. **Pathfinding Algorithms**
 - Dijkstra's Algorithm
 - A* Search
 - Grid-based visualizations with obstacles
 
-### 4. **Tree Data Structures**
+### 3. **Tree Data Structures**
 - Binary Search Tree (BST) operations (Insert, Delete, Search)
 - Tree Traversal Visualizations (In-order, Pre-order, Post-order, BFS/DFS)
 
-### 5. **Interactive Quiz Mode**
+### 4. **Interactive Quiz Mode**
 - Predict-the-next-step challenges
 - Complexity estimation questions
 - Algorithm selection for given problems

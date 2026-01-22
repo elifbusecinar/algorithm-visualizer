@@ -12,8 +12,13 @@ export const generateQuickSortSteps = (arr) => {
         lineIndex: 0
     });
 
+    let stack = [];
+
     const partition = (low, high) => {
         const pivot = array[high];
+
+        stack.push({ name: 'partition', args: `[${low}..${high}]` });
+
         steps.push({
             description: `Selected pivot: ${pivot} at index ${high}`,
             array: [...array],
@@ -21,7 +26,8 @@ export const generateQuickSortSteps = (arr) => {
             pivot: high,
             swaps,
             code: `pivot = arr[${high}] = ${pivot}`,
-            lineIndex: 7
+            lineIndex: 7,
+            callStack: [...stack]
         });
 
         let i = low - 1;
@@ -34,7 +40,8 @@ export const generateQuickSortSteps = (arr) => {
                 comparing: [j, high],
                 swaps,
                 code: `if (arr[${j}] <= ${pivot})`,
-                lineIndex: 9
+                lineIndex: 9,
+                callStack: [...stack]
             });
 
             if (array[j] <= pivot) {
@@ -49,7 +56,8 @@ export const generateQuickSortSteps = (arr) => {
                         swapped: [i, j],
                         swaps,
                         code: `swap(arr[${i}], arr[${j}])`,
-                        lineIndex: 10
+                        lineIndex: 10,
+                        callStack: [...stack]
                     });
                 }
             }
@@ -64,14 +72,28 @@ export const generateQuickSortSteps = (arr) => {
             pivotPlaced: i + 1,
             swaps,
             code: `swap(arr[${i + 1}], arr[${high}])`,
-            lineIndex: 11
+            lineIndex: 11,
+            callStack: [...stack]
         });
+
+        stack.pop(); // Pop partition
 
         return i + 1;
     };
 
     const quickSort = (low, high) => {
+        stack.push({ name: 'quickSort', args: `[${low}..${high}]` });
+
         if (low < high) {
+            steps.push({
+                description: `Partitioning range [${low}..${high}]`,
+                array: [...array],
+                highlight: Array.from({ length: high - low + 1 }, (_, k) => low + k),
+                code: `if (low < high)`,
+                lineIndex: 1,
+                callStack: [...stack]
+            });
+
             const pi = partition(low, high);
 
             steps.push({
@@ -83,12 +105,23 @@ export const generateQuickSortSteps = (arr) => {
                 sorted: [pi],
                 swaps,
                 code: `quickSort(${low}, ${pi - 1}), quickSort(${pi + 1}, ${high})`,
-                lineIndex: 3
+                lineIndex: 3,
+                callStack: [...stack]
             });
 
             quickSort(low, pi - 1);
             quickSort(pi + 1, high);
+        } else {
+            steps.push({
+                description: `Base case: Range [${low}..${high}] too small`,
+                array: [...array],
+                code: `if (low < high)`,
+                lineIndex: 1,
+                callStack: [...stack]
+            });
         }
+
+        stack.pop(); // Pop quickSort
     };
 
     if (array.length > 0) {
@@ -103,7 +136,8 @@ export const generateQuickSortSteps = (arr) => {
         swaps,
         complete: true,
         code: 'return arr;',
-        lineIndex: 12
+        lineIndex: 12,
+        callStack: []
     });
 
     return steps;
