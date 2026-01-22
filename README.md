@@ -61,6 +61,7 @@ The application will be available at `http://localhost:5173`
 
 ### Pathfinding Algorithms
 - [x] **Dijkstra's Algorithm** - Shortest path in a weighted graph
+- [x] **A* Search Algorithm** - Heuristic-based pathfinding (Manhattan Distance)
 
 ### Problem-Solving Algorithms
 - [x] **Two Sum** - Hash map approach for pair finding
@@ -82,15 +83,11 @@ The application will be available at `http://localhost:5173`
 - Execute custom code with the same visualization system
 - Compare user solutions with optimal implementations
 
-### 2. **A* Search Algorithm**
-- Heuristic-based pathfinding
-- Comparison with Dijkstra
-
-### 3. **Tree Data Structures**
+### 2. **Tree Data Structures**
 - Binary Search Tree (BST) operations (Insert, Delete, Search)
 - Tree Traversal Visualizations (In-order, Pre-order, Post-order, BFS/DFS)
 
-### 4. **Interactive Quiz Mode**
+### 3. **Interactive Quiz Mode**
 - Predict-the-next-step challenges
 - Complexity estimation questions
 - Algorithm selection for given problems

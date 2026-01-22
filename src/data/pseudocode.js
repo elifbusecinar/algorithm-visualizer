@@ -191,5 +191,23 @@ export const PSEUDOCODE = {
         "        dist[v] = alt",
         "        prev[v] = u",
         "  return dist, prev"
+    ],
+    aStar: [
+        "function A_Star(start, goal):",
+        "  openSet = {start}",
+        "  gScore[start] = 0",
+        "  fScore[start] = heuristic(start, goal)",
+        "  while openSet is not empty:",
+        "    current = node with lowest fScore",
+        "    if current == goal: return reconstruct_path()",
+        "    remove current from openSet",
+        "    for each neighbor of current:",
+        "      tentative_g = gScore[current] + 1",
+        "      if tentative_g < gScore[neighbor]:",
+        "        record path (cameFrom)",
+        "        gScore[neighbor] = tentative_g",
+        "        fScore[neighbor] = gScore[neighbor] + h(neighbor)",
+        "        if neighbor not in openSet: add to openSet",
+        "  return failure"
     ]
 };

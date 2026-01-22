@@ -128,8 +128,21 @@ const ControlPanel = ({
           onChange={(e) => setAlgorithm(e.target.value)}
           className="w-full bg-gray-800/60 text-white rounded-xl px-4 py-3 border border-fuchsia-500/30 focus:outline-none focus:border-fuchsia-500 focus:ring-2 focus:ring-fuchsia-500/20 transition-all"
         >
-          {Object.entries(ALGORITHMS).map(([key, algo]) => (
-            <option key={key} value={key}>{algo.name}</option>
+          {Object.entries(
+            Object.entries(ALGORITHMS).reduce((acc, [key, algo]) => {
+              const category = algo.category || 'Other';
+              if (!acc[category]) acc[category] = [];
+              acc[category].push({ key, ...algo });
+              return acc;
+            }, {})
+          ).map(([category, algos]) => (
+            <optgroup key={category} label={category} className="bg-gray-800 text-fuchsia-300 font-semibold">
+              {algos.map((algo) => (
+                <option key={algo.key} value={algo.key} className="bg-gray-800 text-white font-normal">
+                  {algo.name}
+                </option>
+              ))}
+            </optgroup>
           ))}
         </select>
         <div className="mt-3 text-xs text-fuchsia-300/50">

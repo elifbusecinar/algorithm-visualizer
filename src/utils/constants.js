@@ -350,6 +350,34 @@ export const ALGORITHMS = {
          - prev[v] = u
          - Q.add(v)
     `
+  },
+  aStar: {
+    name: "A* Search Algorithm",
+    type: 'grid',
+    complexity: 'O(E)',
+    timeComplexity: {
+      best: 'O(E)',
+      average: 'O(E)',
+      worst: 'O(E)'
+    },
+    spaceComplexity: 'O(V)',
+    description: 'Informed search using heuristics (Manhattan Distance) to find shortest path faster',
+    category: 'Pathfinding',
+    pseudocode: `
+1. Init g_score[] = Infinity, f_score[] = Infinity
+2. g_score[start] = 0, f_score[start] = h(start)
+3. OpenSet = {start}
+4. While OpenSet is not empty:
+   a. current = node with lowest f_score
+   b. If current == goal, return path
+   c. For each neighbor:
+      - tentative_g = g_score[current] + 1
+      - If tentative_g < g_score[neighbor]:
+         - record path
+         - g_score[neighbor] = tentative_g
+         - f_score[neighbor] = g_score[neighbor] + h(neighbor)
+         - Add to OpenSet
+    `
   }
 };
 

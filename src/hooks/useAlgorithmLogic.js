@@ -16,6 +16,7 @@ import { generateClimbingStairsSteps } from '../algorithms/climbingStairs';
 import { generateContainerWithMostWaterSteps } from '../algorithms/containerWithMostWater';
 import { generateMoveZeroesSteps } from '../algorithms/moveZeroes';
 import { generateDijkstraSteps } from '../algorithms/dijkstra';
+import { generateAStarSteps } from '../algorithms/aStar';
 
 export const useAlgorithmLogic = ({
     algorithm,
@@ -65,7 +66,7 @@ export const useAlgorithmLogic = ({
                 generatedSteps = generateInsertionSortSteps(inputArray);
                 break;
             case 'bestTimeToBuySellStock':
-                generatedSteps = generateBestTimeToBuySellStockSteps(inputArray);
+                generatedSteps = generateBestTimeToBuySellSteps(inputArray);
                 break;
             case 'longestSubstring':
                 generatedSteps = generateLongestSubstringSteps(longestSubString);
@@ -84,6 +85,9 @@ export const useAlgorithmLogic = ({
                 break;
             case 'dijkstra':
                 generatedSteps = generateDijkstraSteps();
+                break;
+            case 'aStar':
+                generatedSteps = generateAStarSteps();
                 break;
             default:
                 generatedSteps = [];
