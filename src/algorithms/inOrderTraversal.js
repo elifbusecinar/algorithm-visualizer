@@ -71,16 +71,16 @@ const flattenTree = (root) => {
 
         if (node.left) {
             edges.push({
-                from: node.id,
-                to: node.left.id
+                source: node.id,
+                target: node.left.id
             });
             traverse(node.left);
         }
 
         if (node.right) {
             edges.push({
-                from: node.id,
-                to: node.right.id
+                source: node.id,
+                target: node.right.id
             });
             traverse(node.right);
         }
@@ -91,26 +91,28 @@ const flattenTree = (root) => {
 };
 
 // In-order traversal: Left -> Root -> Right
-const inOrderTraversal = (node, steps, visitedOrder) => {
+const inOrderTraversal = (node, steps, visitedOrder, root) => {
     if (!node) return;
 
     // Visit left subtree
     if (node.left) {
         steps.push({
             description: `Traversing to left child of ${node.value}`,
+            ...flattenTree(root),
             visitedOrder: [...visitedOrder],
             currentNode: node.left.id,
             code: 'inOrder(node.left)',
             lineIndex: 2
         });
     }
-    inOrderTraversal(node.left, steps, visitedOrder);
+    inOrderTraversal(node.left, steps, visitedOrder, root);
 
     // Visit root
     node.isVisited = true;
     visitedOrder.push(node.value);
     steps.push({
         description: `Visiting node ${node.value}`,
+        ...flattenTree(root),
         visitedOrder: [...visitedOrder],
         currentNode: node.id,
         code: `visit(${node.value})`,
@@ -121,13 +123,14 @@ const inOrderTraversal = (node, steps, visitedOrder) => {
     if (node.right) {
         steps.push({
             description: `Traversing to right child of ${node.value}`,
+            ...flattenTree(root),
             visitedOrder: [...visitedOrder],
             currentNode: node.right.id,
             code: 'inOrder(node.right)',
             lineIndex: 4
         });
     }
-    inOrderTraversal(node.right, steps, visitedOrder);
+    inOrderTraversal(node.right, steps, visitedOrder, root);
 };
 
 export const generateInOrderSteps = (inputArray) => {
@@ -148,7 +151,7 @@ export const generateInOrderSteps = (inputArray) => {
 
     // Perform traversal
     const visitedOrder = [];
-    inOrderTraversal(root, steps, visitedOrder);
+    inOrderTraversal(root, steps, visitedOrder, root);
 
     // Add final step
     steps.push({
@@ -161,8 +164,5 @@ export const generateInOrderSteps = (inputArray) => {
     });
 
     // Update all steps with tree structure
-    return steps.map(step => ({
-        ...step,
-        ...flattenTree(root)
-    }));
+    return steps;
 };

@@ -67,12 +67,12 @@ const flattenTree = (root) => {
         });
 
         if (node.left) {
-            edges.push({ from: node.id, to: node.left.id });
+            edges.push({ source: node.id, target: node.left.id });
             traverse(node.left);
         }
 
         if (node.right) {
-            edges.push({ from: node.id, to: node.right.id });
+            edges.push({ source: node.id, target: node.right.id });
             traverse(node.right);
         }
     };
@@ -82,38 +82,41 @@ const flattenTree = (root) => {
 };
 
 // Post-order traversal: Left -> Right -> Root
-const postOrderTraversal = (node, steps, visitedOrder) => {
+const postOrderTraversal = (node, steps, visitedOrder, root) => {
     if (!node) return;
 
     // Visit left subtree
     if (node.left) {
         steps.push({
             description: `Traversing to left child of ${node.value}`,
+            ...flattenTree(root),
             visitedOrder: [...visitedOrder],
             currentNode: node.left.id,
             code: 'postOrder(node.left)',
             lineIndex: 2
         });
     }
-    postOrderTraversal(node.left, steps, visitedOrder);
+    postOrderTraversal(node.left, steps, visitedOrder, root);
 
     // Visit right subtree
     if (node.right) {
         steps.push({
             description: `Traversing to right child of ${node.value}`,
+            ...flattenTree(root),
             visitedOrder: [...visitedOrder],
             currentNode: node.right.id,
             code: 'postOrder(node.right)',
             lineIndex: 3
         });
     }
-    postOrderTraversal(node.right, steps, visitedOrder);
+    postOrderTraversal(node.right, steps, visitedOrder, root);
 
     // Visit root last
     node.isVisited = true;
     visitedOrder.push(node.value);
     steps.push({
         description: `Visiting node ${node.value}`,
+        ...flattenTree(root),
         visitedOrder: [...visitedOrder],
         currentNode: node.id,
         code: `visit(${node.value})`,
@@ -137,7 +140,7 @@ export const generatePostOrderSteps = (inputArray) => {
     });
 
     const visitedOrder = [];
-    postOrderTraversal(root, steps, visitedOrder);
+    postOrderTraversal(root, steps, visitedOrder, root);
 
     steps.push({
         description: `✓ Traversal Complete! Order: [${visitedOrder.join(', ')}]`,
@@ -148,8 +151,5 @@ export const generatePostOrderSteps = (inputArray) => {
         lineIndex: 5
     });
 
-    return steps.map(step => ({
-        ...step,
-        ...flattenTree(root)
-    }));
+    return steps;
 };

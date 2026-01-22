@@ -67,12 +67,12 @@ const flattenTree = (root) => {
         });
 
         if (node.left) {
-            edges.push({ from: node.id, to: node.left.id });
+            edges.push({ source: node.id, target: node.left.id });
             traverse(node.left);
         }
 
         if (node.right) {
-            edges.push({ from: node.id, to: node.right.id });
+            edges.push({ source: node.id, target: node.right.id });
             traverse(node.right);
         }
     };
@@ -165,8 +165,5 @@ export const generateDFSTreeSteps = (inputArray) => {
         lineIndex: 9
     });
 
-    return steps.map(step => ({
-        ...step,
-        ...flattenTree(root)
-    }));
+    return steps;
 };

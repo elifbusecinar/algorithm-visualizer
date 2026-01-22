@@ -67,12 +67,12 @@ const flattenTree = (root) => {
         });
 
         if (node.left) {
-            edges.push({ from: node.id, to: node.left.id });
+            edges.push({ source: node.id, target: node.left.id });
             traverse(node.left);
         }
 
         if (node.right) {
-            edges.push({ from: node.id, to: node.right.id });
+            edges.push({ source: node.id, target: node.right.id });
             traverse(node.right);
         }
     };
@@ -82,7 +82,7 @@ const flattenTree = (root) => {
 };
 
 // Pre-order traversal: Root -> Left -> Right
-const preOrderTraversal = (node, steps, visitedOrder) => {
+const preOrderTraversal = (node, steps, visitedOrder, root) => {
     if (!node) return;
 
     // Visit root first
@@ -90,6 +90,7 @@ const preOrderTraversal = (node, steps, visitedOrder) => {
     visitedOrder.push(node.value);
     steps.push({
         description: `Visiting node ${node.value}`,
+        ...flattenTree(root),
         visitedOrder: [...visitedOrder],
         currentNode: node.id,
         code: `visit(${node.value})`,
@@ -100,25 +101,27 @@ const preOrderTraversal = (node, steps, visitedOrder) => {
     if (node.left) {
         steps.push({
             description: `Traversing to left child of ${node.value}`,
+            ...flattenTree(root),
             visitedOrder: [...visitedOrder],
             currentNode: node.left.id,
             code: 'preOrder(node.left)',
             lineIndex: 3
         });
     }
-    preOrderTraversal(node.left, steps, visitedOrder);
+    preOrderTraversal(node.left, steps, visitedOrder, root);
 
     // Visit right subtree
     if (node.right) {
         steps.push({
             description: `Traversing to right child of ${node.value}`,
+            ...flattenTree(root),
             visitedOrder: [...visitedOrder],
             currentNode: node.right.id,
             code: 'preOrder(node.right)',
             lineIndex: 4
         });
     }
-    preOrderTraversal(node.right, steps, visitedOrder);
+    preOrderTraversal(node.right, steps, visitedOrder, root);
 };
 
 export const generatePreOrderSteps = (inputArray) => {
@@ -137,7 +140,7 @@ export const generatePreOrderSteps = (inputArray) => {
     });
 
     const visitedOrder = [];
-    preOrderTraversal(root, steps, visitedOrder);
+    preOrderTraversal(root, steps, visitedOrder, root);
 
     steps.push({
         description: `✓ Traversal Complete! Order: [${visitedOrder.join(', ')}]`,
@@ -148,8 +151,5 @@ export const generatePreOrderSteps = (inputArray) => {
         lineIndex: 5
     });
 
-    return steps.map(step => ({
-        ...step,
-        ...flattenTree(root)
-    }));
+    return steps;
 };
