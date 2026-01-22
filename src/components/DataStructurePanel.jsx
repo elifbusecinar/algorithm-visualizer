@@ -11,15 +11,18 @@ const DataStructurePanel = ({ stepData }) => {
   const hasSorted = stepData.sorted && stepData.sorted.length > 0;
   const hasPointers = stepData.pointers !== undefined;
   const hasMaxSum = stepData.maxSum !== undefined;
-  const hasNodes = stepData.nodes !== undefined;
+  // Only show linked list info if nodes exist AND we have prev/current/next pointers (not just any nodes)
+  const hasNodes = stepData.nodes !== undefined && (stepData.prev !== undefined || stepData.current !== undefined);
   const hasDP = stepData.dp !== undefined;
   const hasMaxArea = stepData.maxArea !== undefined;
+  const hasGrid = stepData.grid !== undefined; // For pathfinding algorithms
+  const hasBSTNodes = stepData.nodes !== undefined && stepData.edges !== undefined; // For BST
   const isComplete = stepData.complete;
 
   return (
     <div className="bg-gray-900/40 backdrop-blur-xl border border-fuchsia-500/20 rounded-2xl p-6">
       <h3 className="text-lg font-bold text-fuchsia-300 mb-4">
-        {hasCallStack ? 'Recursive Call Stack' : hasMap ? 'HashMap' : hasSet ? 'Set' : hasStack ? 'Stack' : hasNodes ? 'Linked List Info' : hasDP ? 'Dynamic Programming Info' : 'Algorithm Info'}
+        {hasCallStack ? 'Recursive Call Stack' : hasMap ? 'HashMap' : hasSet ? 'Set' : hasStack ? 'Stack' : hasBSTNodes ? 'Tree Info' : hasNodes ? 'Linked List Info' : hasDP ? 'Dynamic Programming Info' : hasGrid ? 'Pathfinding Info' : 'Algorithm Info'}
       </h3>
 
       {/* Recursive Call Stack Display */}
@@ -91,29 +94,98 @@ const DataStructurePanel = ({ stepData }) => {
         </div>
       )}
 
-      {/* Algorithm Statistics */}
-      {!hasMap && !hasSet && !hasStack && (
+      {/* Pathfinding Info */}
+      {hasGrid && (
         <div className="space-y-3">
-          {/* Binary Search Pointers */}
+          {(() => {
+            const visitedCount = stepData.grid.flat().filter(node => node.isVisited).length;
+            const pathNodes = stepData.grid.flat().filter(node => node.isPath);
+            const pathLength = pathNodes.length > 0 ? pathNodes.length - 1 : 0;
+            const wallCount = stepData.grid.flat().filter(node => node.isWall).length;
+
+            return (
+              <>
+                <div className="bg-cyan-500/10 px-4 py-3 rounded-lg border border-cyan-500/20">
+                  <div className="flex items-center gap-2 mb-1">
+                    <BarChart3 className="w-4 h-4 text-cyan-400" />
+                    <span className="text-sm text-cyan-300 font-semibold">Nodes Visited</span>
+                  </div>
+                  <div className="text-2xl font-bold text-white">{visitedCount}</div>
+                </div>
+
+                {pathLength > 0 && (
+                  <div className="bg-fuchsia-500/10 px-4 py-3 rounded-lg border border-fuchsia-500/20">
+                    <div className="flex items-center gap-2 mb-1">
+                      <TrendingUp className="w-4 h-4 text-fuchsia-400" />
+                      <span className="text-sm text-fuchsia-300 font-semibold">Path Length</span>
+                    </div>
+                    <div className="text-2xl font-bold text-white">{pathLength}</div>
+                  </div>
+                )}
+
+                <div className="bg-gray-800/50 px-4 py-3 rounded-lg border border-gray-700/50">
+                  <div className="text-sm text-gray-400 font-semibold mb-2">Grid Info</div>
+                  <div className="space-y-1 text-xs">
+                    <div className="flex justify-between">
+                      <span className="text-gray-400">Walls:</span>
+                      <span className="text-white font-mono">{wallCount}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-gray-400">Grid Size:</span>
+                      <span className="text-white font-mono">{stepData.grid.length} × {stepData.grid[0]?.length || 0}</span>
+                    </div>
+                  </div>
+                </div>
+              </>
+            );
+          })()}
+        </div>
+      )}
+
+      {/* Algorithm Statistics */}
+      {!hasMap && !hasSet && !hasStack && !hasGrid && (
+        <div className="space-y-3">
+          {/* Pointers Info */}
           {hasPointers && (
             <div className="space-y-2">
               <div className="bg-cyan-500/10 px-4 py-3 rounded-lg border border-cyan-500/20">
                 <div className="text-sm text-cyan-300 font-semibold mb-2">Pointers</div>
                 <div className="space-y-1 text-xs">
-                  <div className="flex justify-between">
-                    <span className="text-gray-400">Left:</span>
-                    <span className="text-white font-mono">{stepData.pointers.left}</span>
-                  </div>
-                  {stepData.pointers.mid !== undefined && (
-                    <div className="flex justify-between">
-                      <span className="text-gray-400">Mid:</span>
-                      <span className="text-white font-mono font-bold">{stepData.pointers.mid}</span>
-                    </div>
+                  {/* Move Zeroes pointers */}
+                  {stepData.pointers.lastNonZero !== undefined && (
+                    <>
+                      <div className="flex justify-between">
+                        <span className="text-gray-400">Last Non-Zero:</span>
+                        <span className="text-white font-mono">{stepData.pointers.lastNonZero}</span>
+                      </div>
+                      {stepData.pointers.current !== undefined && (
+                        <div className="flex justify-between">
+                          <span className="text-gray-400">Current:</span>
+                          <span className="text-white font-mono font-bold">{stepData.pointers.current}</span>
+                        </div>
+                      )}
+                    </>
                   )}
-                  <div className="flex justify-between">
-                    <span className="text-gray-400">Right:</span>
-                    <span className="text-white font-mono">{stepData.pointers.right}</span>
-                  </div>
+
+                  {/* Binary Search / Two Pointers */}
+                  {stepData.pointers.left !== undefined && (
+                    <>
+                      <div className="flex justify-between">
+                        <span className="text-gray-400">Left:</span>
+                        <span className="text-white font-mono">{stepData.pointers.left}</span>
+                      </div>
+                      {stepData.pointers.mid !== undefined && (
+                        <div className="flex justify-between">
+                          <span className="text-gray-400">Mid:</span>
+                          <span className="text-white font-mono font-bold">{stepData.pointers.mid}</span>
+                        </div>
+                      )}
+                      <div className="flex justify-between">
+                        <span className="text-gray-400">Right:</span>
+                        <span className="text-white font-mono">{stepData.pointers.right}</span>
+                      </div>
+                    </>
+                  )}
                 </div>
               </div>
             </div>
@@ -166,8 +238,47 @@ const DataStructurePanel = ({ stepData }) => {
             </>
           )}
 
+          {/* BST (Tree) Info */}
+          {hasBSTNodes && (
+            <div className="space-y-3">
+              <div className="bg-fuchsia-500/10 px-4 py-3 rounded-lg border border-fuchsia-500/20">
+                <div className="flex items-center gap-2 mb-1">
+                  <Layers className="w-4 h-4 text-fuchsia-400" />
+                  <span className="text-sm text-fuchsia-300 font-semibold">Total Nodes</span>
+                </div>
+                <div className="text-2xl font-bold text-white">{stepData.nodes?.length || 0}</div>
+              </div>
+
+              {stepData.rootId && (
+                <div className="bg-cyan-500/10 px-4 py-3 rounded-lg border border-cyan-500/20">
+                  <div className="flex items-center gap-2 mb-1">
+                    <CheckCircle className="w-4 h-4 text-cyan-400" />
+                    <span className="text-sm text-cyan-300 font-semibold">Root Value</span>
+                  </div>
+                  <div className="text-2xl font-bold text-white">
+                    {stepData.nodes?.find(n => n.id === stepData.rootId)?.value || 'N/A'}
+                  </div>
+                </div>
+              )}
+
+              <div className="bg-gray-800/50 px-4 py-3 rounded-lg border border-gray-700/50">
+                <div className="text-sm text-gray-400 font-semibold mb-2">Tree Structure</div>
+                <div className="space-y-1 text-xs">
+                  <div className="flex justify-between">
+                    <span className="text-gray-400">Edges:</span>
+                    <span className="text-white font-mono">{stepData.edges?.length || 0}</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-gray-400">Approx. Height:</span>
+                    <span className="text-white font-mono">~{Math.ceil(Math.log2((stepData.nodes?.length || 1) + 1))}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
           {/* Linked List Info */}
-          {hasNodes && (
+          {hasNodes && !hasBSTNodes && (
             <div className="space-y-3">
               <div className="bg-gray-800/50 px-4 py-3 rounded-lg border border-gray-700/50">
                 <div className="text-sm text-gray-400 font-semibold mb-2">Pointers</div>
