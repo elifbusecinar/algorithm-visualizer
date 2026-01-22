@@ -6,7 +6,8 @@ export const generateMergeSortSteps = (arr) => {
         description: 'Starting Merge Sort - will divide array and merge sorted halves',
         array: [...array],
         highlight: [],
-        code: 'function mergeSort(arr) { ... }'
+        code: 'function mergeSort(arr) { ... }',
+        lineIndex: 0
     });
 
     const mergeSort = (arr, start = 0, end = arr.length - 1, depth = 0) => {
@@ -20,7 +21,8 @@ export const generateMergeSortSteps = (arr) => {
             highlight: Array.from({ length: end - start + 1 }, (_, i) => start + i),
             dividing: { start, mid, end },
             depth,
-            code: `mid = (${start} + ${end}) / 2 = ${mid}`
+            code: `mid = (${start} + ${end}) / 2 = ${mid}`,
+            lineIndex: 2
         });
 
         mergeSort(arr, start, mid, depth + 1);
@@ -39,7 +41,8 @@ export const generateMergeSortSteps = (arr) => {
             highlight: Array.from({ length: end - start + 1 }, (_, i) => start + i),
             merging: { start, mid, end, left, right },
             depth,
-            code: `merge(left, right)`
+            code: `merge(left, right)`,
+            lineIndex: 7
         });
 
         let i = 0, j = 0, k = start;
@@ -59,7 +62,8 @@ export const generateMergeSortSteps = (arr) => {
                 highlight: [k],
                 merging: { start, mid, end },
                 depth,
-                code: `arr[${k}] = ${array[k]}`
+                code: `arr[${k}] = ${array[k]}`,
+                lineIndex: 12
             });
             k++;
         }
@@ -71,7 +75,8 @@ export const generateMergeSortSteps = (arr) => {
                 array: [...array],
                 highlight: [k],
                 depth,
-                code: `arr[${k}] = ${array[k]}`
+                code: `arr[${k}] = ${array[k]}`,
+                lineIndex: 16
             });
             i++;
             k++;
@@ -84,7 +89,8 @@ export const generateMergeSortSteps = (arr) => {
                 array: [...array],
                 highlight: [k],
                 depth,
-                code: `arr[${k}] = ${array[k]}`
+                code: `arr[${k}] = ${array[k]}`,
+                lineIndex: 16
             });
             j++;
             k++;
@@ -96,7 +102,8 @@ export const generateMergeSortSteps = (arr) => {
             highlight: Array.from({ length: end - start + 1 }, (_, i) => start + i),
             sorted: Array.from({ length: end - start + 1 }, (_, i) => start + i),
             depth,
-            code: '// Merge complete'
+            code: '// Merge complete',
+            lineIndex: 6
         });
     };
 
@@ -108,7 +115,8 @@ export const generateMergeSortSteps = (arr) => {
         highlight: [],
         sorted: array.map((_, i) => i),
         complete: true,
-        code: 'return arr;'
+        code: 'return arr;',
+        lineIndex: 16
     });
 
     return steps;

@@ -11,7 +11,8 @@ export const generateBestTimeToBuySellStockSteps = (prices) => {
         highlight: [],
         minPrice,
         maxProfit,
-        code: 'let minPrice = prices[0], maxProfit = 0;'
+        code: 'let minPrice = prices[0], maxProfit = 0;',
+        lineIndex: 1
     });
 
     steps.push({
@@ -21,7 +22,8 @@ export const generateBestTimeToBuySellStockSteps = (prices) => {
         minPrice,
         maxProfit,
         buyDay: 0,
-        code: `minPrice = ${prices[0]}`
+        code: `minPrice = ${prices[0]}`,
+        lineIndex: 1
     });
 
     for (let i = 1; i < prices.length; i++) {
@@ -36,7 +38,8 @@ export const generateBestTimeToBuySellStockSteps = (prices) => {
             maxProfit,
             buyDay,
             sellDay,
-            code: `profit = prices[${i}] - minPrice = ${prices[i]} - ${minPrice} = ${profit}`
+            code: `profit = prices[${i}] - minPrice = ${prices[i]} - ${minPrice} = ${profit}`,
+            lineIndex: 3
         });
 
         if (prices[i] < minPrice) {
@@ -51,7 +54,8 @@ export const generateBestTimeToBuySellStockSteps = (prices) => {
                 maxProfit,
                 buyDay: i,
                 sellDay,
-                code: `minPrice = ${minPrice}, buyDay = ${i}`
+                code: `minPrice = ${minPrice}, buyDay = ${i}`,
+                lineIndex: 5
             });
         } else if (profit > maxProfit) {
             maxProfit = profit;
@@ -65,7 +69,8 @@ export const generateBestTimeToBuySellStockSteps = (prices) => {
                 maxProfit,
                 buyDay,
                 sellDay: i,
-                code: `maxProfit = ${maxProfit}, sellDay = ${i}`
+                code: `maxProfit = ${maxProfit}, sellDay = ${i}`,
+                lineIndex: 7
             });
         }
     }
@@ -81,7 +86,8 @@ export const generateBestTimeToBuySellStockSteps = (prices) => {
         buyDay,
         sellDay,
         complete: true,
-        code: `return ${maxProfit};`
+        code: `return ${maxProfit};`,
+        lineIndex: 8
     });
 
     return steps;

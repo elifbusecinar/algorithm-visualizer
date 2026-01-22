@@ -1,7 +1,7 @@
 export const generateContainsDuplicateSteps = (arr) => {
   const steps = [];
   const seen = new Set();
-  
+
   steps.push({
     description: 'Initialize empty Set to track seen values',
     array: arr,
@@ -9,7 +9,8 @@ export const generateContainsDuplicateSteps = (arr) => {
     set: new Set(),
     current: -1,
     found: false,
-    code: 'const seen = new Set();'
+    code: 'const seen = new Set();',
+    lineIndex: 1
   });
 
   for (let i = 0; i < arr.length; i++) {
@@ -20,7 +21,8 @@ export const generateContainsDuplicateSteps = (arr) => {
       set: new Set(seen),
       current: i,
       found: false,
-      code: `if (seen.has(${arr[i]})) { ... }`
+      code: `if (seen.has(${arr[i]})) { ... }`,
+      lineIndex: 2
     });
 
     if (seen.has(arr[i])) {
@@ -31,7 +33,8 @@ export const generateContainsDuplicateSteps = (arr) => {
         set: new Set(seen),
         current: i,
         found: true,
-        code: 'return true;'
+        code: 'return true;',
+        lineIndex: 4
       });
       break;
     }
@@ -44,7 +47,8 @@ export const generateContainsDuplicateSteps = (arr) => {
       set: new Set(seen),
       current: i,
       found: false,
-      code: `seen.add(${arr[i]});`
+      code: `seen.add(${arr[i]});`,
+      lineIndex: 5
     });
   }
 
@@ -56,7 +60,8 @@ export const generateContainsDuplicateSteps = (arr) => {
       set: new Set(seen),
       current: -1,
       found: false,
-      code: 'return false;'
+      code: 'return false;',
+      lineIndex: 6
     });
   }
 

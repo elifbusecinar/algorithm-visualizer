@@ -1,0 +1,157 @@
+export const PSEUDOCODE = {
+    bubbleSort: [
+        "function bubbleSort(arr):",
+        "  n = arr.length",
+        "  for i from 0 to n-1:",
+        "    for j from 0 to n-i-1:",
+        "      if arr[j] > arr[j+1]:",
+        "        swap(arr[j], arr[j+1])",
+        "  return arr"
+    ],
+    selectionSort: [
+        "function selectionSort(arr):",
+        "  n = arr.length",
+        "  for i from 0 to n-1:",
+        "    minIdx = i",
+        "    for j from i+1 to n:",
+        "      if arr[j] < arr[minIdx]:",
+        "        minIdx = j",
+        "    if minIdx != i:",
+        "      swap(arr[i], arr[minIdx])",
+        "  return arr"
+    ],
+    insertionSort: [
+        "function insertionSort(arr):",
+        "  for i from 1 to n:",
+        "    key = arr[i]",
+        "    j = i - 1",
+        "    while j >= 0 and arr[j] > key:",
+        "      arr[j+1] = arr[j]",
+        "      j = j - 1",
+        "    arr[j+1] = key",
+        "  return arr"
+    ],
+    binarySearch: [
+        "function binarySearch(arr, target):",
+        "  left = 0, right = arr.length - 1",
+        "  while left <= right:",
+        "    mid = floor((left + right) / 2)",
+        "    if arr[mid] == target:",
+        "      return mid",
+        "    else if arr[mid] < target:",
+        "      left = mid + 1",
+        "    else:",
+        "      right = mid - 1",
+        "  return -1"
+    ],
+    twoSum: [
+        "function twoSum(nums, target):",
+        "  map = new Map()",
+        "  for i from 0 to nums.length:",
+        "    diff = target - nums[i]",
+        "    if map.has(diff):",
+        "      return [map.get(diff), i]",
+        "    map.set(nums[i], i)",
+        "  return []"
+    ],
+    longestSubstring: [
+        "function lengthOfLongestSubstring(s):",
+        "  map = new Map(), maxLen = 0",
+        "  left = 0",
+        "  for right from 0 to s.length:",
+        "    if map.has(s[right]):",
+        "      left = max(map.get(s[right]) + 1, left)",
+        "    map.set(s[right], right)",
+        "    maxLen = max(maxLen, right - left + 1)",
+        "  return maxLen"
+    ],
+    reverseLinkedList: [
+        "function reverseList(head):",
+        "  prev = null",
+        "  curr = head",
+        "  while curr != null:",
+        "    nextTemp = curr.next",
+        "    curr.next = prev",
+        "    prev = curr",
+        "    curr = nextTemp",
+        "  return prev"
+    ],
+    validParentheses: [
+        "function isValid(s):",
+        "  stack = []",
+        "  map = { ')': '(', '}': '{', ']': '[' }",
+        "  for char in s:",
+        "    if char in map:",
+        "      if stack.pop() != map[char]:",
+        "        return false",
+        "    else:",
+        "      stack.push(char)",
+        "  return stack.isEmpty()"
+    ],
+    climbingStairs: [
+        "function climbStairs(n):",
+        "  dp = [0] * (n + 1)",
+        "  dp[0] = 1, dp[1] = 1",
+        "  for i from 2 to n:",
+        "    dp[i] = dp[i-1] + dp[i-2]",
+        "  return dp[n]"
+    ],
+    bestTimeToBuySellStock: [
+        "function maxProfit(prices):",
+        "  minPrice = infinity",
+        "  maxProfit = 0",
+        "  for price in prices:",
+        "    if price < minPrice:",
+        "      minPrice = price",
+        "    else if price - minPrice > maxProfit:",
+        "      maxProfit = price - minPrice",
+        "  return maxProfit"
+    ],
+    containsDuplicate: [
+        "function containsDuplicate(nums):",
+        "  seen = new Set()",
+        "  for num in nums:",
+        "    if seen.has(num):",
+        "      return true",
+        "    seen.add(num)",
+        "  return false"
+    ],
+    maxSubarray: [
+        "function maxSubArray(nums):",
+        "  curSum = nums[0], maxSum = nums[0]",
+        "  for i from 1 to nums.length:",
+        "    curSum = max(nums[i], curSum + nums[i])",
+        "    maxSum = max(maxSum, curSum)",
+        "  return maxSum"
+    ],
+    mergeSort: [
+        "function mergeSort(arr):",
+        "  if arr.length <= 1: return arr",
+        "  mid = floor(arr.length / 2)",
+        "  left = mergeSort(arr[0..mid])",
+        "  right = mergeSort(arr[mid..end])",
+        "  return merge(left, right)",
+        "function merge(left, right):",
+        "  result = [], i = 0, j = 0",
+        "  while i < left.length and j < right.length:",
+        "    if left[i] < right[j]:",
+        "      result.push(left[i++])",
+        "    else:",
+        "      result.push(right[j++])",
+        "  return result + left[i..] + right[j..]"
+    ],
+    quickSort: [
+        "function quickSort(arr, low, high):",
+        "  if low < high:",
+        "    pi = partition(arr, low, high)",
+        "    quickSort(arr, low, pi - 1)",
+        "    quickSort(arr, pi + 1, high)",
+        "function partition(arr, low, high):",
+        "  pivot = arr[high], i = low - 1",
+        "  for j from low to high - 1:",
+        "    if arr[j] < pivot:",
+        "      i++, swap(arr[i], arr[j])",
+        "  swap(arr[i + 1], arr[high])",
+        "  return i + 1"
+    ]
+};

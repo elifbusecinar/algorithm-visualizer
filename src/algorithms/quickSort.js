@@ -8,7 +8,8 @@ export const generateQuickSortSteps = (arr) => {
         array: [...array],
         highlight: [],
         swaps: 0,
-        code: 'function quickSort(arr, low, high) { ... }'
+        code: 'function quickSort(arr, low, high) { ... }',
+        lineIndex: 0
     });
 
     const partition = (low, high) => {
@@ -19,7 +20,8 @@ export const generateQuickSortSteps = (arr) => {
             highlight: [high],
             pivot: high,
             swaps,
-            code: `pivot = arr[${high}] = ${pivot}`
+            code: `pivot = arr[${high}] = ${pivot}`,
+            lineIndex: 7
         });
 
         let i = low - 1;
@@ -31,7 +33,8 @@ export const generateQuickSortSteps = (arr) => {
                 highlight: [j, high],
                 comparing: [j, high],
                 swaps,
-                code: `if (arr[${j}] <= ${pivot})`
+                code: `if (arr[${j}] <= ${pivot})`,
+                lineIndex: 9
             });
 
             if (array[j] <= pivot) {
@@ -45,7 +48,8 @@ export const generateQuickSortSteps = (arr) => {
                         highlight: [i, j],
                         swapped: [i, j],
                         swaps,
-                        code: `swap(arr[${i}], arr[${j}])`
+                        code: `swap(arr[${i}], arr[${j}])`,
+                        lineIndex: 10
                     });
                 }
             }
@@ -59,7 +63,8 @@ export const generateQuickSortSteps = (arr) => {
             highlight: [i + 1],
             pivotPlaced: i + 1,
             swaps,
-            code: `swap(arr[${i + 1}], arr[${high}])`
+            code: `swap(arr[${i + 1}], arr[${high}])`,
+            lineIndex: 11
         });
 
         return i + 1;
@@ -77,7 +82,8 @@ export const generateQuickSortSteps = (arr) => {
                 ),
                 sorted: [pi],
                 swaps,
-                code: `quickSort(${low}, ${pi - 1}), quickSort(${pi + 1}, ${high})`
+                code: `quickSort(${low}, ${pi - 1}), quickSort(${pi + 1}, ${high})`,
+                lineIndex: 3
             });
 
             quickSort(low, pi - 1);
@@ -96,7 +102,8 @@ export const generateQuickSortSteps = (arr) => {
         sorted: array.map((_, i) => i),
         swaps,
         complete: true,
-        code: 'return arr;'
+        code: 'return arr;',
+        lineIndex: 12
     });
 
     return steps;

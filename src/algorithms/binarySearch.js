@@ -10,7 +10,8 @@ export const generateBinarySearchSteps = (arr, target) => {
         highlight: [],
         pointers: { left, right },
         target,
-        code: 'let left = 0, right = arr.length - 1;'
+        code: 'let left = 0, right = arr.length - 1;',
+        lineIndex: 1
     });
 
     while (left <= right) {
@@ -23,7 +24,8 @@ export const generateBinarySearchSteps = (arr, target) => {
             pointers: { left, right, mid },
             target,
             comparing: array[mid],
-            code: `mid = Math.floor((${left} + ${right}) / 2) = ${mid}`
+            code: `mid = Math.floor((${left} + ${right}) / 2) = ${mid}`,
+            lineIndex: 3
         });
 
         if (array[mid] === target) {
@@ -35,7 +37,8 @@ export const generateBinarySearchSteps = (arr, target) => {
                 target,
                 found: true,
                 foundIndex: mid,
-                code: `return ${mid}; // Found!`
+                code: `return ${mid}; // Found!`,
+                lineIndex: 5
             });
             return steps;
         } else if (array[mid] < target) {
@@ -46,7 +49,8 @@ export const generateBinarySearchSteps = (arr, target) => {
                 pointers: { left, right, mid },
                 target,
                 searchDirection: 'right',
-                code: `left = mid + 1 = ${mid + 1}`
+                code: `left = mid + 1 = ${mid + 1}`,
+                lineIndex: 7
             });
             left = mid + 1;
         } else {
@@ -57,7 +61,8 @@ export const generateBinarySearchSteps = (arr, target) => {
                 pointers: { left, right, mid },
                 target,
                 searchDirection: 'left',
-                code: `right = mid - 1 = ${mid - 1}`
+                code: `right = mid - 1 = ${mid - 1}`,
+                lineIndex: 9
             });
             right = mid - 1;
         }
@@ -70,7 +75,8 @@ export const generateBinarySearchSteps = (arr, target) => {
         pointers: { left, right },
         target,
         notFound: true,
-        code: 'return -1; // Not found'
+        code: 'return -1; // Not found',
+        lineIndex: 10
     });
 
     return steps;

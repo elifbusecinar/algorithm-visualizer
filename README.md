@@ -15,6 +15,8 @@ Experience the visualizer live: [Algorithm Visualizer](https://algorithm-visuali
 - **Speed Control**: Adjust animation speed to match your learning pace
 - **Responsive Design**: Works seamlessly across desktop and mobile devices
 - **Complexity Analysis Panel**: View detailed Time and Space complexity (Best/Avg/Worst) for each algorithm
+- **Edge Case Testing Mode**: Quickly load preset inputs (e.g., Sorted, Reverse Sorted) to test algorithm behavior
+- **Interactive Pseudocode Viewer**: View and track algorithm pseudocode execution in real-time (Available for all supported algorithms)
 
 ## 🛠️ Technologies Used
 
@@ -65,11 +67,7 @@ The application will be available at `http://localhost:5173`
 
 ## 🚀 Planned Features
 
-### 1. **Interactive Pseudocode Viewer** (Toggleable)
-- Display algorithm pseudocode alongside visualization
-- Highlight the currently executing line in real-time
-- Collapsible panel to maximize screen space when not needed
-- Syntax-highlighted code with step annotations
+
 
 
 
@@ -108,11 +106,7 @@ The application will be available at `http://localhost:5173`
 - Execute custom code with the same visualization system
 - Compare user solutions with optimal implementations
 
-### 8. **Edge Case Testing Mode**
-- Automated edge case generation (empty arrays, duplicates, sorted/reverse sorted)
-- Toggle between normal and edge case inputs
-- Educational explanations of why edge cases matter
-- Test algorithm robustness
+
 
 ### 9. **Interactive Quiz Mode**
 - Predict-the-next-step challenges

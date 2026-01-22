@@ -14,7 +14,8 @@ export const generateLongestSubstringSteps = (str) => {
         window: [],
         maxLength: 0,
         charMap: {},
-        code: 'const charMap = new Map(); let start = 0;'
+        code: 'const charMap = new Map(); let start = 0;',
+        lineIndex: 1
     });
 
     for (let end = 0; end < chars.length; end++) {
@@ -28,7 +29,8 @@ export const generateLongestSubstringSteps = (str) => {
             currentChar: char,
             maxLength,
             charMap: Object.fromEntries(charMap),
-            code: `char = str[${end}] = '${char}'`
+            code: `char = str[${end}] = '${char}'`,
+            lineIndex: 3
         });
 
         if (charMap.has(char) && charMap.get(char) >= start) {
@@ -43,7 +45,8 @@ export const generateLongestSubstringSteps = (str) => {
                 duplicate: true,
                 maxLength,
                 charMap: Object.fromEntries(charMap),
-                code: `start = charMap.get('${char}') + 1 = ${start}`
+                code: `start = charMap.get('${char}') + 1 = ${start}`,
+                lineIndex: 5
             });
         }
 
@@ -64,7 +67,8 @@ export const generateLongestSubstringSteps = (str) => {
                 maxLength,
                 maxSubstring: chars.slice(start, end + 1).join(''),
                 charMap: Object.fromEntries(charMap),
-                code: `maxLength = ${maxLength}`
+                code: `maxLength = ${maxLength}`,
+                lineIndex: 7
             });
         } else {
             steps.push({
@@ -74,7 +78,8 @@ export const generateLongestSubstringSteps = (str) => {
                 window: Array.from({ length: end - start + 1 }, (_, k) => start + k),
                 maxLength,
                 charMap: Object.fromEntries(charMap),
-                code: `charMap.set('${char}', ${end})`
+                code: `charMap.set('${char}', ${end})`,
+                lineIndex: 6
             });
         }
     }
@@ -88,7 +93,8 @@ export const generateLongestSubstringSteps = (str) => {
         maxSubstring: chars.slice(maxStart, maxEnd + 1).join(''),
         complete: true,
         charMap: Object.fromEntries(charMap),
-        code: `return ${maxLength};`
+        code: `return ${maxLength};`,
+        lineIndex: 8
     });
 
     return steps;

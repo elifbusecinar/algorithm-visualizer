@@ -9,7 +9,8 @@ export const generateClimbingStairsSteps = (n) => {
         n,
         dp: [...dp],
         highlight: [],
-        code: 'dp[0] = 1, dp[1] = 1;'
+        code: 'dp[0] = 1, dp[1] = 1;',
+        lineIndex: 1
     });
 
     steps.push({
@@ -17,7 +18,8 @@ export const generateClimbingStairsSteps = (n) => {
         n,
         dp: [...dp],
         highlight: [0, 1],
-        code: 'dp[0] = 1 (no steps), dp[1] = 1 (one 1-step)'
+        code: 'dp[0] = 1 (no steps), dp[1] = 1 (one 1-step)',
+        lineIndex: 2
     });
 
     for (let i = 2; i <= n; i++) {
@@ -27,7 +29,8 @@ export const generateClimbingStairsSteps = (n) => {
             dp: [...dp],
             highlight: [i],
             computing: i,
-            code: `dp[${i}] = dp[${i - 1}] + dp[${i - 2}]`
+            code: `dp[${i}] = dp[${i - 1}] + dp[${i - 2}]`,
+            lineIndex: 3
         });
 
         dp[i] = dp[i - 1] + dp[i - 2];
@@ -40,7 +43,8 @@ export const generateClimbingStairsSteps = (n) => {
             result: dp[i],
             fromPrev: dp[i - 1],
             fromTwoSteps: dp[i - 2],
-            code: `dp[${i}] = ${dp[i - 1]} + ${dp[i - 2]} = ${dp[i]}`
+            code: `dp[${i}] = ${dp[i - 1]} + ${dp[i - 2]} = ${dp[i]}`,
+            lineIndex: 4
         });
     }
 
@@ -51,7 +55,8 @@ export const generateClimbingStairsSteps = (n) => {
         highlight: [n],
         complete: true,
         totalWays: dp[n],
-        code: `return dp[${n}] = ${dp[n]};`
+        code: `return dp[${n}] = ${dp[n]};`,
+        lineIndex: 5
     });
 
     return steps;

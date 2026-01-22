@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Info, X } from 'lucide-react';
 import { complexityData } from '../data/complexityData';
+import { PSEUDOCODE } from '../data/pseudocode';
 
 import Header from './Header';
 import ControlPanel from './ControlPanel';
@@ -170,7 +171,11 @@ const AlgorithmVisualizer = () => {
         {/* Description & Code */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
           <StepDescription description={currentStepData.description} />
-          <CodeDisplay code={currentStepData.code} />
+          <CodeDisplay
+            code={currentStepData.code}
+            pseudocode={PSEUDOCODE[algorithm]}
+            highlightedLine={currentStepData?.lineIndex}
+          />
         </div>
 
         {/* Control Panel */}

@@ -13,7 +13,8 @@ export const generateMaxSubarraySteps = (arr) => {
         maxSum,
         currentSum,
         maxSubarray: [0],
-        code: 'let maxSum = arr[0], currentSum = arr[0];'
+        code: 'let maxSum = arr[0], currentSum = arr[0];',
+        lineIndex: 1
     });
 
     steps.push({
@@ -24,7 +25,8 @@ export const generateMaxSubarraySteps = (arr) => {
         currentSum,
         currentStart: 0,
         maxSubarray: [0],
-        code: `currentSum = ${currentSum}`
+        code: `currentSum = ${currentSum}`,
+        lineIndex: 1
     });
 
     for (let i = 1; i < array.length; i++) {
@@ -38,7 +40,8 @@ export const generateMaxSubarraySteps = (arr) => {
             currentSum,
             comparing: { standalone: array[i], withPrevious: currentSum + array[i] },
             maxSubarray: Array.from({ length: maxEnd - maxStart + 1 }, (_, k) => maxStart + k),
-            code: `currentSum + arr[${i}] = ${currentSum} + ${array[i]} = ${currentSum + array[i]}`
+            code: `currentSum + arr[${i}] = ${currentSum} + ${array[i]} = ${currentSum + array[i]}`,
+            lineIndex: 3
         });
 
         if (currentSum + array[i] < array[i]) {
@@ -52,7 +55,8 @@ export const generateMaxSubarraySteps = (arr) => {
                 currentSum,
                 newStart: i,
                 maxSubarray: Array.from({ length: maxEnd - maxStart + 1 }, (_, k) => maxStart + k),
-                code: `currentSum = arr[${i}] = ${array[i]}`
+                code: `currentSum = arr[${i}] = ${array[i]}`,
+                lineIndex: 3
             });
         } else {
             currentSum = currentSum + array[i];
@@ -64,7 +68,8 @@ export const generateMaxSubarraySteps = (arr) => {
                 currentSum,
                 extending: true,
                 maxSubarray: Array.from({ length: maxEnd - maxStart + 1 }, (_, k) => maxStart + k),
-                code: `currentSum += arr[${i}] = ${currentSum}`
+                code: `currentSum += arr[${i}] = ${currentSum}`,
+                lineIndex: 3
             });
         }
 
@@ -80,7 +85,8 @@ export const generateMaxSubarraySteps = (arr) => {
                 currentSum,
                 newMax: true,
                 maxSubarray: Array.from({ length: maxEnd - maxStart + 1 }, (_, k) => maxStart + k),
-                code: `maxSum = ${maxSum}`
+                code: `maxSum = ${maxSum}`,
+                lineIndex: 4
             });
         }
     }
@@ -96,7 +102,8 @@ export const generateMaxSubarraySteps = (arr) => {
         currentSum,
         maxSubarray: maxSubarrayIndices,
         complete: true,
-        code: `return ${maxSum}; // Indices [${maxStart}..${maxEnd}]`
+        code: `return ${maxSum}; // Indices [${maxStart}..${maxEnd}]`,
+        lineIndex: 5
     });
 
     return steps;

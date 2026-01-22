@@ -9,7 +9,8 @@ export const generateValidParenthesesSteps = (str) => {
         chars: [...chars],
         stack: [],
         currentIndex: -1,
-        code: 'const stack = [];'
+        code: 'const stack = [];',
+        lineIndex: 1
     });
 
     for (let i = 0; i < chars.length; i++) {
@@ -21,7 +22,8 @@ export const generateValidParenthesesSteps = (str) => {
             stack: [...stack],
             currentIndex: i,
             highlight: [i],
-            code: `char = str[${i}] = '${char}'`
+            code: `char = str[${i}] = '${char}'`,
+            lineIndex: 3
         });
 
         if (char === '(' || char === '{' || char === '[') {
@@ -34,7 +36,8 @@ export const generateValidParenthesesSteps = (str) => {
                 highlight: [i],
                 operation: 'push',
                 pushedChar: char,
-                code: `stack.push('${char}')`
+                code: `stack.push('${char}')`,
+                lineIndex: 8
             });
         } else if (char === ')' || char === '}' || char === ']') {
             if (stack.length === 0) {
@@ -45,7 +48,8 @@ export const generateValidParenthesesSteps = (str) => {
                     currentIndex: i,
                     highlight: [i],
                     valid: false,
-                    code: 'return false; // No matching opening bracket'
+                    code: 'return false; // No matching opening bracket',
+                    lineIndex: 6
                 });
                 return steps;
             }
@@ -61,7 +65,8 @@ export const generateValidParenthesesSteps = (str) => {
                     valid: false,
                     operation: 'mismatch',
                     poppedChar: top,
-                    code: `return false; // '${top}' != '${matchingBrackets[char]}'`
+                    code: `return false; // '${top}' != '${matchingBrackets[char]}'`,
+                    lineIndex: 6
                 });
                 return steps;
             }
@@ -75,7 +80,8 @@ export const generateValidParenthesesSteps = (str) => {
                 operation: 'pop',
                 poppedChar: top,
                 matchedWith: char,
-                code: `stack.pop() // Matched '${top}' with '${char}'`
+                code: `stack.pop() // Matched '${top}' with '${char}'`,
+                lineIndex: 5
             });
         }
     }
@@ -90,7 +96,8 @@ export const generateValidParenthesesSteps = (str) => {
         currentIndex: chars.length,
         valid: isValid,
         complete: true,
-        code: `return ${isValid}; // ${stack.length === 0 ? 'Stack empty' : 'Unmatched brackets remain'}`
+        code: `return ${isValid}; // ${stack.length === 0 ? 'Stack empty' : 'Unmatched brackets remain'}`,
+        lineIndex: 9
     });
 
     return steps;

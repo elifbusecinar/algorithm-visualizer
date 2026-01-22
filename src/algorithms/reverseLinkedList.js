@@ -13,7 +13,8 @@ export const generateReverseLinkedListSteps = (arr) => {
         highlight: [],
         prev: null,
         current: 0,
-        code: 'let prev = null, current = head;'
+        code: 'let prev = null, current = head;',
+        lineIndex: 1
     });
 
     let prev = null;
@@ -29,7 +30,8 @@ export const generateReverseLinkedListSteps = (arr) => {
             prev,
             current,
             next,
-            code: `next = current.next = ${next !== null ? nodes[next].value : 'null'}`
+            code: `next = current.next = ${next !== null ? nodes[next].value : 'null'}`,
+            lineIndex: 4
         });
 
         nodes[current].next = prev;
@@ -42,7 +44,8 @@ export const generateReverseLinkedListSteps = (arr) => {
             prev,
             current,
             next,
-            code: `current.next = prev`
+            code: `current.next = prev`,
+            lineIndex: 5
         });
 
         prev = current;
@@ -54,7 +57,8 @@ export const generateReverseLinkedListSteps = (arr) => {
             highlight: current !== null ? [current] : [],
             prev,
             current,
-            code: `prev = current; current = next;`
+            code: `prev = current; current = next;`,
+            lineIndex: 7
         });
     }
 
@@ -66,7 +70,8 @@ export const generateReverseLinkedListSteps = (arr) => {
         current: null,
         newHead: prev,
         complete: true,
-        code: `return prev; // New head`
+        code: `return prev; // New head`,
+        lineIndex: 8
     });
 
     return steps;

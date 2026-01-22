@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Zap, BarChart3, TrendingUp } from 'lucide-react';
-import { ALGORITHMS, SPEEDS } from '../utils/constants';
+import { Zap, BarChart3, TrendingUp, Sparkles } from 'lucide-react';
+import { ALGORITHMS, SPEEDS, DEFAULT_ARRAYS } from '../utils/constants';
+import { getEdgeCasesForAlgorithm } from '../utils/edgeCases';
 
 const ControlPanel = ({
   algorithm,
@@ -20,11 +21,99 @@ const ControlPanel = ({
 }) => {
   const [arrayInput, setArrayInput] = useState(inputArray.join(', '));
   const algoInfo = ALGORITHMS[algorithm];
+  const currentPresets = getEdgeCasesForAlgorithm(algorithm);
 
-  // Update local state when inputArray prop changes (e.g., when algorithm changes)
+  // Update local state when inputArray prop changes
   useEffect(() => {
     setArrayInput(inputArray.join(', '));
   }, [inputArray]);
+
+  const handlePresetChange = (e) => {
+    const selectedIndex = e.target.value;
+    if (selectedIndex === "") return;
+
+    const index = parseInt(selectedIndex);
+    const selectedPreset = currentPresets?.presets[index];
+
+    if (!selectedPreset) return;
+
+    let val = selectedPreset.value;
+
+    // Handle "random" generation
+    if (val === 'random') {
+      if (algorithm === 'validParentheses') {
+        const len = 8;
+        let res = '';
+        const chars = '()[]{}';
+        for (let i = 0; i < len; i++) res += chars[Math.floor(Math.random() * chars.length)];
+        setParenString(res);
+      } else if (algorithm === 'longestSubstring') {
+        const chars = 'abcdefghijklmnopqrstuvwxyz';
+        let res = '';
+        const len = 10;
+        for (let i = 0; i < len; i++) res += chars[Math.floor(Math.random() * chars.length)];
+        setLongestSubString(res);
+      } else {
+        const len = Math.floor(Math.random() * 5) + 5; // 5-10 elements
+        const arr = Array.from({ length: len }, () => Math.floor(Math.random() * 50) - 10);
+        setInputArray(arr);
+        setArrayInput(arr.join(', '));
+      }
+      return;
+    }
+
+    // Handle "default" value
+    if (val === 'default') {
+      // Use DEFAULT_ARRAYS or specific defaults
+      if (algorithm === 'longestSubstring') val = 'abcabcbb';
+      else if (algorithm === 'validParentheses') val = '({[]})';
+      else if (DEFAULT_ARRAYS[algorithm]) val = DEFAULT_ARRAYS[algorithm];
+      else val = [1, 2, 3, 4, 5]; // Fallback
+    }
+
+    // Apply the value
+    if (algorithm === 'validParentheses') {
+      setParenString(val);
+    } else if (algorithm === 'longestSubstring') {
+      setLongestSubString(val);
+    } else if (algorithm === 'climbingStairs') {
+      setClimbStairs(val);
+    } else if (algorithm === 'binarySearch') {
+      setInputArray(val);
+      setArrayInput(val.join(', '));
+      if (selectedPreset.target !== undefined) {
+        setTarget(selectedPreset.target);
+      }
+    } else {
+      setInputArray(val);
+      if (Array.isArray(val)) {
+        setArrayInput(val.join(', '));
+      }
+    }
+  };
+
+  const PresetSelector = () => (
+    currentPresets && (
+      <div className="mb-4">
+        <label className="flex items-center gap-2 text-xs font-semibold text-fuchsia-300/70 mb-1.5 uppercase tracking-wider">
+          <Sparkles className="w-3 h-3" />
+          Quick Presets
+        </label>
+        <select
+          className="w-full bg-gray-800/40 text-sm text-gray-300 rounded-lg px-3 py-2 border border-fuchsia-500/20 focus:outline-none focus:border-fuchsia-500/40 focus:bg-gray-800 transition-all hover:border-fuchsia-500/30"
+          onChange={handlePresetChange}
+          defaultValue=""
+        >
+          <option value="" disabled>Load a preset...</option>
+          {currentPresets.presets.map((preset, idx) => (
+            <option key={idx} value={idx}>
+              {preset.label}
+            </option>
+          ))}
+        </select>
+      </div>
+    )
+  );
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-6">
@@ -51,15 +140,18 @@ const ControlPanel = ({
       {/* Input Panel - Dynamic based on algorithm */}
       {algorithm === 'validParentheses' ? (
         <div className="bg-gray-900/40 backdrop-blur-xl border border-indigo-500/20 rounded-2xl p-5">
-          <label className="flex items-center gap-2 text-sm font-semibold text-indigo-300 mb-3">
-            <BarChart3 className="w-4 h-4" />
-            Parentheses String
-          </label>
+          <div className="flex justify-between items-start mb-3">
+            <label className="flex items-center gap-2 text-sm font-semibold text-indigo-300">
+              <BarChart3 className="w-4 h-4" />
+              Parentheses String
+            </label>
+          </div>
+          <PresetSelector />
           <input
             type="text"
             value={parenString}
             onChange={(e) => setParenString(e.target.value)}
-            className="w-full bg-gray-800/60 text-white rounded-xl px-4 py-3 border border-fuchsia-500/30 focus:outline-none focus:border-fuchsia-500 focus:ring-2 focus:ring-fuchsia-500/20 transition-all font-mono text-2xl text-center"
+            className="w-full bg-gray-800/60 text-white rounded-xl px-4 py-3 border border-fuchsia-500/30 focus:outline-none focus:border-fuchsia-500 focus:ring-2 focus:ring-fuchsia-500/20 transition-all font-mono text-xl text-center"
             placeholder="({[]})"
           />
           <div className="mt-3 text-xs text-fuchsia-300/50">
@@ -68,10 +160,13 @@ const ControlPanel = ({
         </div>
       ) : algorithm === 'longestSubstring' ? (
         <div className="bg-gray-900/40 backdrop-blur-xl border border-indigo-500/20 rounded-2xl p-5">
-          <label className="flex items-center gap-2 text-sm font-semibold text-indigo-300 mb-3">
-            <BarChart3 className="w-4 h-4" />
-            Input String
-          </label>
+          <div className="flex justify-between items-start mb-3">
+            <label className="flex items-center gap-2 text-sm font-semibold text-indigo-300">
+              <BarChart3 className="w-4 h-4" />
+              Input String
+            </label>
+          </div>
+          <PresetSelector />
           <input
             type="text"
             value={longestSubString}
@@ -85,10 +180,13 @@ const ControlPanel = ({
         </div>
       ) : algorithm === 'climbingStairs' ? (
         <div className="bg-gray-900/40 backdrop-blur-xl border border-indigo-500/20 rounded-2xl p-5">
-          <label className="flex items-center gap-2 text-sm font-semibold text-indigo-300 mb-3">
-            <BarChart3 className="w-4 h-4" />
-            Number of Stairs
-          </label>
+          <div className="flex justify-between items-start mb-3">
+            <label className="flex items-center gap-2 text-sm font-semibold text-indigo-300">
+              <BarChart3 className="w-4 h-4" />
+              Number of Stairs
+            </label>
+          </div>
+          <PresetSelector />
           <input
             type="number"
             min="1"
@@ -103,10 +201,13 @@ const ControlPanel = ({
         </div>
       ) : (
         <div className="bg-gray-900/40 backdrop-blur-xl border border-indigo-500/20 rounded-2xl p-5">
-          <label className="flex items-center gap-2 text-sm font-semibold text-indigo-300 mb-3">
-            <BarChart3 className="w-4 h-4" />
-            Input Array
-          </label>
+          <div className="flex justify-between items-start mb-3">
+            <label className="flex items-center gap-2 text-sm font-semibold text-indigo-300">
+              <BarChart3 className="w-4 h-4" />
+              Input Array
+            </label>
+          </div>
+          <PresetSelector />
           <input
             type="text"
             value={arrayInput}

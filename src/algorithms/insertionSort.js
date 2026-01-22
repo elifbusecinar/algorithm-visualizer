@@ -9,7 +9,8 @@ export const generateInsertionSortSteps = (arr) => {
         highlight: [0],
         sorted: [0],
         swaps: 0,
-        code: 'for (let i = 1; i < n; i++) { ... }'
+        code: 'for (let i = 1; i < n; i++) { ... }',
+        lineIndex: 1
     });
 
     for (let i = 1; i < array.length; i++) {
@@ -22,7 +23,8 @@ export const generateInsertionSortSteps = (arr) => {
             key,
             sorted: Array.from({ length: i }, (_, k) => k),
             swaps,
-            code: `key = arr[${i}] = ${key}`
+            code: `key = arr[${i}] = ${key}`,
+            lineIndex: 2
         });
 
         let j = i - 1;
@@ -34,7 +36,8 @@ export const generateInsertionSortSteps = (arr) => {
                 highlight: [j, j + 1],
                 comparing: [j, j + 1],
                 swaps,
-                code: `arr[${j + 1}] = arr[${j}]`
+                code: `arr[${j + 1}] = arr[${j}]`,
+                lineIndex: 4
             });
 
             array[j + 1] = array[j];
@@ -51,7 +54,8 @@ export const generateInsertionSortSteps = (arr) => {
             inserted: j + 1,
             sorted: Array.from({ length: i + 1 }, (_, k) => k),
             swaps,
-            code: `arr[${j + 1}] = ${key}`
+            code: `arr[${j + 1}] = ${key}`,
+            lineIndex: 7
         });
     }
 
@@ -62,7 +66,8 @@ export const generateInsertionSortSteps = (arr) => {
         sorted: array.map((_, i) => i),
         swaps,
         complete: true,
-        code: 'return arr;'
+        code: 'return arr;',
+        lineIndex: 8
     });
 
     return steps;
