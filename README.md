@@ -17,6 +17,8 @@ Experience the visualizer live: [Algorithm Visualizer](https://algorithm-visuali
 - **Complexity Analysis Panel**: View detailed Time and Space complexity (Best/Avg/Worst) for each algorithm
 - **Edge Case Testing Mode**: Quickly load preset inputs (e.g., Sorted, Reverse Sorted) to test algorithm behavior
 - **Interactive Pseudocode Viewer**: View and track algorithm pseudocode execution in real-time (Available for all supported algorithms)
+- **Linked List Visualization**: Dynamic, arrow-based visualization for linked list operations (e.g., Reverse Linked List)
+- **Algorithm Comparison Mode**: Side-by-side performance comparison of different algorithms on the same dataset
 
 ## 🛠️ Technologies Used
 
@@ -67,48 +69,28 @@ The application will be available at `http://localhost:5173`
 
 ## 🚀 Planned Features
 
-
-
-
-
-### 3. **Algorithm Comparison Mode**
-- Side-by-side comparison of two algorithms
-- Synchronized or independent execution controls
-- Visual performance comparison on the same dataset
-- Ideal for understanding trade-offs between different approaches
-
-### 4. **Complexity Analysis Display**
-- Real-time time and space complexity indicators
-- Big O notation with explanations
-- Operation counters (comparisons, swaps, etc.)
-- Memory usage visualization
-
-### 4. **Dynamic Complexity Scenarios**
-- Visualize best, average, and worst-case scenarios
-- Generate inputs that demonstrate different complexity behaviors
-- Educational explanations for why certain inputs trigger specific complexities
-
-### 5. **Linked List Arrows**
-- Visual arrows showing node connections
-- Pointer manipulation animations
-- Clear distinction between next/prev pointers
-- Node reference tracking during operations
-
-### 6. **Recursive Call Stack Visualization**
+### 1. **Recursive Call Stack Visualization**
 - Dynamic call stack display for recursive algorithms
 - Frame-by-frame stack growth and collapse
 - Variable state at each recursion level
 - Visual representation of recursion tree
 
-### 7. **User-Written Code Execution**
+### 2. **User-Written Code Execution**
 - Code editor for users to write their own algorithms
 - Syntax checking and error highlighting
 - Execute custom code with the same visualization system
 - Compare user solutions with optimal implementations
 
+### 3. **Pathfinding Algorithms**
+- Dijkstra's Algorithm
+- A* Search
+- Grid-based visualizations with obstacles
 
+### 4. **Tree Data Structures**
+- Binary Search Tree (BST) operations (Insert, Delete, Search)
+- Tree Traversal Visualizations (In-order, Pre-order, Post-order, BFS/DFS)
 
-### 9. **Interactive Quiz Mode**
+### 5. **Interactive Quiz Mode**
 - Predict-the-next-step challenges
 - Complexity estimation questions
 - Algorithm selection for given problems
